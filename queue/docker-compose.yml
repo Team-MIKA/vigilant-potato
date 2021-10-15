@@ -1,0 +1,16 @@
+services:
+  rabbitmq:
+    build: .
+    container_name: rabbitmq
+    volumes:
+      - ./.docker/rabbitmq/etc/:/etc/rabbitmq/
+      - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
+      - ./.docker/rabbitmq/logs/:/var/log/rabbitmq/
+    environment:
+      - RABBITMQ_DEFAULT_USER=$USER
+      - RABBITMQ_DEFAULT_PASS=$PASS
+    ports:
+      - 5672:5672
+      - 15672:15672
+      - 1883:1883
+      
