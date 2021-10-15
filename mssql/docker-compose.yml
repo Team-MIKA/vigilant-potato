@@ -6,5 +6,7 @@ services:
       - ACCEPT_EULA=${ACCEPT_EULA}
       - SA_PASSWORD=${SA_PASSWORD}
       - MSSQL_PID=${MSSQL_PID}
+    volumes:
+      - ./.docker/data:/var/opt/mssql/data
     ports:
       - "1433:1433"
