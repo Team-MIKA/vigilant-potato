@@ -1,0 +1,23 @@
+services:
+  mongo:
+    container_name: mongodb
+    image: mongo
+    restart: unless-stopped #could be 'always' insted.
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: $ROOTUSER
+      MONGO_INITDB_ROOT_PASSWORD: $ROOTPASS
+    volumes:
+      - ./.docker/mongodb/etc/:/etc/mongodb/
+      - ./.docker/mongodb/data/:/var/lib/mongodb/
+      - ./.docker/mongodb/logs/:/var/log/mongodb/
+
+  mongo-express:
+    container_name: mongo-express
+    image: mongo-express
+    restart: unless-stopped
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: $ADMINUSER
+      ME_CONFIG_MONGODB_ADMINPASSWORD: $ADMINPASS
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
