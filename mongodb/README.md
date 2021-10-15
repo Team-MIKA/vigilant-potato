@@ -11,3 +11,4 @@ Look at the .env.template for inspiration on how to configure the image
 
 ## Resources
 https://hub.docker.com/_/mongo?tab=description
+https://stackoverflow.com/questions/47901561/how-to-run-mongodb-and-mongo-express-with-docker-compose
