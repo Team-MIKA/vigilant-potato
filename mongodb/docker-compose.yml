@@ -6,10 +6,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: $ROOTUSER
       MONGO_INITDB_ROOT_PASSWORD: $ROOTPASS
-    volumes:
-      - ./.docker/mongodb/etc/:/etc/mongodb/
-      - ./.docker/mongodb/data/:/var/lib/mongodb/
-      - ./.docker/mongodb/logs/:/var/log/mongodb/
+    
 
   mongo-express:
     container_name: mongo-express
