@@ -1,0 +1,7 @@
+version: "3"
+services:
+  dotnet:
+    build: .
+    container_name: dotnet
+    ports:
+      - 8080:80
