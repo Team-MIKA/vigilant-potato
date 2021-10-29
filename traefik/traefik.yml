@@ -16,7 +16,13 @@ global:
 ################################################################
 # EntryPoints configuration
 ################################################################
-
+certificatesResolvers:
+  http:
+    acme:
+      email: kasperstenholtwinkler@gmail.com
+      storage: /acme_data/acme.json
+      httpChallenge:
+        entryPoint: web
 # EntryPoints definition
 #
 # Optional
