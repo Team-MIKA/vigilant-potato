@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using integrator.Contexts;
 using integrator.Models;
 using integrator.Services;
 using Microsoft.AspNetCore.Builder;
@@ -32,14 +33,12 @@ namespace integrator
             var config = new ServerConfig();
             Configuration.Bind(config);
 
-            var mongoDbContext = new IntegratorDbContext(config.MongoDb);
-            var todoService = new TodoService(mongoDbContext);
-            var bookService = new BookService(mongoDbContext);
+            var mongoContext = new MongoDbContext(config.MongoDb);
             
-            services.AddSingleton<ITodoService>(todoService);
-            services.AddSingleton<IBookService>(bookService);
+            services.AddSingleton<ITodoService>(new TodoService(mongoContext));
+            services.AddSingleton<IBookService>(new BookService(mongoContext));
             
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
             
             // requires using Microsoft.Extensions.Options
