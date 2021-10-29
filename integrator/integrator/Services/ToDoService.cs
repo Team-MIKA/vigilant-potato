@@ -1,3 +1,4 @@
+using integrator.Contexts;
 using integrator.Models;
 
 namespace integrator.Services
@@ -9,8 +10,8 @@ namespace integrator.Services
     using System.Linq;
     public class TodoService : ITodoService
     {
-        private readonly IIntegratorDbContext _context;
-        public TodoService(IIntegratorDbContext context)
+        private readonly IMongoDbContext _context;
+        public TodoService(IMongoDbContext context)
         {
             _context = context;
         }
