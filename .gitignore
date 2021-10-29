@@ -1,2 +1,5 @@
 .docker/
 .env
+.idea
+integrator/integrator/obj/
+integrator/integrator/bin/
