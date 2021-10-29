@@ -23,4 +23,5 @@ Look at the .env.template for inspiration on how to configure the image
 * https://hub.docker.com/_/mongo?tab=description
 * https://stackoverflow.com/questions/47901561/how-to-run-mongodb-and-mongo-express-with-docker-compose
 * https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mongo-app?view=aspnetcore-5.0&tabs=visual-studio
+The following article is used to setup the connection with dotnet and mongodb:
 * https://medium.com/@kristaps.strals/docker-mongodb-net-core-a-good-time-e21f1acb4b7b
