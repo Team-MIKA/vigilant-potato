@@ -1,4 +1,3 @@
-using BooksApi.Models;
 using integrator.Models;
 using integrator.Services;
 using Microsoft.AspNetCore.Mvc;

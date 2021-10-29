@@ -1,4 +1,3 @@
-using BooksApi.Models;
 using integrator.Models;
 using MongoDB.Driver;
 

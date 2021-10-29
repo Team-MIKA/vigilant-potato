@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace BooksApi.Models
+namespace integrator.Models
 {
     public class Book
     {

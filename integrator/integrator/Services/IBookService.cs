@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using BooksApi.Models;
+using integrator.Models;
 
 namespace integrator.Services
 {
