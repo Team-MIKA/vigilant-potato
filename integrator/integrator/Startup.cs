@@ -29,14 +29,27 @@ namespace integrator
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var config = new ServerConfig();
+            Configuration.Bind(config);
+
+            var mongoDbContext = new IntegratorDbContext(config.MongoDb);
+            var todoService = new TodoService(mongoDbContext);
+            var bookService = new BookService(mongoDbContext);
+            
+            services.AddSingleton<ITodoService>(todoService);
+            services.AddSingleton<IBookService>(bookService);
+            
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
+            
             // requires using Microsoft.Extensions.Options
-            services.Configure<BookstoreDatabaseSettings>(
-                Configuration.GetSection(nameof(BookstoreDatabaseSettings)));
+            //services.Configure<BookstoreDatabaseSettings>(
+            //    Configuration.GetSection(nameof(BookstoreDatabaseSettings)));
 
-            services.AddSingleton<IBookstoreDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<BookstoreDatabaseSettings>>().Value);
+            //services.AddSingleton<IBookstoreDatabaseSettings>(sp =>
+            //    sp.GetRequiredService<IOptions<BookstoreDatabaseSettings>>().Value);
 
-            services.AddSingleton<BookService>();
+            //
 
             services.AddControllers();
 
