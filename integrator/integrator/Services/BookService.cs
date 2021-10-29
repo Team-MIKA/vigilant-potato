@@ -3,15 +3,16 @@ using integrator.Models;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
+using integrator.Contexts;
 
 namespace integrator.Services
 {
     public class BookService : IBookService
     {
         
-        private readonly IIntegratorDbContext _context;
+        private readonly IMongoDbContext _context;
 
-        public BookService(IIntegratorDbContext context)
+        public BookService(IMongoDbContext context)
         {
             _context = context;
         }
