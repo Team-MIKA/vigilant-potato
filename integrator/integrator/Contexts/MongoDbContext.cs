@@ -1,14 +1,13 @@
 using BooksApi.Models;
+using integrator.Models;
+using MongoDB.Driver;
 
-namespace integrator.Models
+namespace integrator.Contexts
 {
-    using integrator;
-    using MongoDB.Driver;
-    using System;
-    public class IntegratorDbContext: IIntegratorDbContext
+    public class MongoDbContext: IMongoDbContext
     {
         private readonly IMongoDatabase _db;
-        public IntegratorDbContext(MongoDbConfig config)
+        public MongoDbContext(MongoDbConfig config)
         {
             var client = new MongoClient(config.ConnectionString);
             _db = client.GetDatabase(config.Database);

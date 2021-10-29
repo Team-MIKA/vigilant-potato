@@ -1,9 +1,10 @@
 using BooksApi.Models;
+using integrator.Models;
+using MongoDB.Driver;
 
-namespace integrator.Models
+namespace integrator.Contexts
 {
-    using MongoDB.Driver;
-    public interface IIntegratorDbContext
+    public interface IMongoDbContext
     {
         IMongoCollection<Todo> Todos { get; }
         
