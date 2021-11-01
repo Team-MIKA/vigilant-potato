@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using GraphQL.Server.Ui.Voyager;
 using integrator.Contexts;
+using integrator.GraphQL;
 using integrator.Models;
 using integrator.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 namespace integrator
@@ -37,6 +31,13 @@ namespace integrator
             
             services.AddSingleton<ITodoService>(new TodoService(mongoContext));
             services.AddSingleton<IBookService>(new BookService(mongoContext));
+
+            services
+                .AddGraphQLServer()
+                .AddQueryType<Query>()
+                .AddFiltering()
+                .AddSorting()
+                .AddProjections();
             
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
@@ -74,7 +75,15 @@ namespace integrator
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints => {
+                endpoints.MapGraphQL(); 
+                //endpoints.MapControllers(); 
+            });
+
+            app.UseGraphQLVoyager(new VoyagerOptions()
+            {
+                GraphQLEndPoint = "/graphql"
+            }, "/graphql-voyager");
         }
     }
 }
