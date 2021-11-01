@@ -3,7 +3,7 @@ using integrator.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace BooksApi.Controllers
+namespace integrator.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
