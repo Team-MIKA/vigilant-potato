@@ -32,6 +32,9 @@ namespace integrator
             services.AddSingleton<ITodoService>(new TodoService(mongoContext));
             services.AddSingleton<IBookService>(new BookService(mongoContext));
 
+            
+            services.AddSingleton<IMongoDbContext>(new MongoDbContext(config.MongoDb));
+
             services
                 .AddGraphQLServer()
                 .AddQueryType<Query>()
