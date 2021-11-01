@@ -7,7 +7,6 @@ namespace integrator.Services
     using System.Threading.Tasks;
     using MongoDB.Driver;
     using MongoDB.Bson;
-    using System.Linq;
     public class TodoService : ITodoService
     {
         private readonly IMongoDbContext _context;
