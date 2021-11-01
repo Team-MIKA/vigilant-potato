@@ -20,8 +20,8 @@ namespace integrator.GraphQL
         [UseProjection]
         [UseFiltering]
         [UseSorting]
-        public IEnumerable<Book> GetBooks([Service] IBookService bookService){
-            return bookService.Get();
+        public IEnumerable<Book> GetBooks([Service] IMongoDbContext context){
+            return context.Books.Find(_ => true).ToList();
         }
     }
 }
