@@ -17,7 +17,6 @@ namespace integrator.GraphQL
     {
 
         // The correct order is UsePaging > UseProjection > UseFiltering > UseSorting
-        [UseFirstOrDefault] // Not sure how to use this one??? https://chillicream.com/docs/hotchocolate/fetching-data/projections
         [UseProjection]
         [UseFiltering]
         [UseSorting]
