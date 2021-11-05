@@ -8,6 +8,8 @@ services:
       - "8080:8080"
     labels:
       - "traefik.enable=true"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.$host`)"
     networks:
       - traefik-proxy
     volumes:
