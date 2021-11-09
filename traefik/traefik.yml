@@ -2,26 +2,24 @@ global:
   checkNewVersion: false
   sendAnonymousUsage: false
 
-certificatesResolvers:
-  http:
-    acme:
-      email: kasperstenholtwinkler@gmail.com
-      storage: /acme_data/acme.json
-      httpChallenge:
-        entryPoint: web
+# certificatesResolvers:
+#   http:
+#     acme:
+#       email: kasperstenholtwinkler@gmail.com
+#       storage: /acme_data/acme.json
+#       httpChallenge:
+#         entryPoint: web
 
 entryPoints:
   web:
     address: :80
-  websecure:
-    address: :443
 
 log:
   level: ERROR
 
 api:
-  dashboard: true
   insecure: true
 
 providers:
-  docker: {}
+  docker:
+    exposedByDefault: false
