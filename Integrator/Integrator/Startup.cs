@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Integrator
 {
@@ -26,6 +27,12 @@ namespace Integrator
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<IntegratorContext>(options => options
+                .UseMySql(Configuration.GetConnectionString("MariaDb"), new MariaDbServerVersion(new Version(10, 6, 5)))
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors()
+            );
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
