@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
-ENV ASPNETCORE_ENVIRONMENT "Development"
+#ENV ASPNETCORE_ENVIRONMENT "Development"
 #ENV ASPNETCORE_URLS=https://localhost:5001;http://localhost:5000
 #ENV ASPNETCORE_URLS "https://+:443;http://+:80"
 #ENV ASPNETCORE_URLS "http://+:80"

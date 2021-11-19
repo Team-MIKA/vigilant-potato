@@ -27,7 +27,7 @@ namespace Integrator
             services.AddAutoMapper(typeof(Startup));
 
             services.AddDbContext<IntegratorContext>(options => options
-                .UseMySql(Configuration.GetConnectionString("MariaDb"), new MariaDbServerVersion(new Version(10, 6, 5)))
+                .UseMySql(Configuration.GetConnectionString("MariaDbDocker"), new MariaDbServerVersion(new Version(10, 6, 5)))
                 .LogTo(Console.WriteLine, LogLevel.Information)
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors()
