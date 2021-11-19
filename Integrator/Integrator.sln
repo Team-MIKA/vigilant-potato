@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integrator", "Integrator\Integrator.csproj", "{48BF815C-D2E6-42D5-8695-181AAC99703D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integrator.Tests", "Integrator.Tests\Integrator.Tests.csproj", "{A08CA4E9-5941-4187-A4E4-9F5AEB05568A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{48BF815C-D2E6-42D5-8695-181AAC99703D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48BF815C-D2E6-42D5-8695-181AAC99703D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48BF815C-D2E6-42D5-8695-181AAC99703D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A08CA4E9-5941-4187-A4E4-9F5AEB05568A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A08CA4E9-5941-4187-A4E4-9F5AEB05568A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A08CA4E9-5941-4187-A4E4-9F5AEB05568A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A08CA4E9-5941-4187-A4E4-9F5AEB05568A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

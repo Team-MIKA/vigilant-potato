@@ -3,14 +3,16 @@ using System;
 using Integrator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Integrator.Migrations
 {
     [DbContext(typeof(IntegratorContext))]
-    partial class IntegratorContextModelSnapshot : ModelSnapshot
+    [Migration("20211119111425_settingsBaseEntity")]
+    partial class settingsBaseEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
