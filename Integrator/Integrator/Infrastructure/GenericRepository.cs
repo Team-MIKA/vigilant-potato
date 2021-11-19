@@ -6,7 +6,7 @@ namespace Integrator.Infrastructure
 {
     public class GenericRepository<T> : IGenericRepository<T> where T: BaseEntity  
     {
-        private readonly IntegratorContext _context;
+        protected readonly IntegratorContext _context;
 
         public GenericRepository(IntegratorContext context)
         {
