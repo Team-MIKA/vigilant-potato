@@ -22,9 +22,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       working-directory: Integrator/
-    - name: asd
-      run: ls -la
     - name: Build
       run: dotnet build -c release --no-restore
-#     - name: Test
-#       run: dotnet test --no-build --verbosity normal
+      working-directory: Integrator/
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+      working-directory: Integrator/
