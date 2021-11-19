@@ -1,8 +1,9 @@
-﻿namespace Integrator.Features.Settings.Models
+﻿using Integrator.Infrastructure;
+
+namespace Integrator.Features.Settings.Models
 {
-    public class Setting
+    public class Setting : BaseEntity
     {
-        public string Id { get; set; }
         public string Name { get; set; }
     }
 }

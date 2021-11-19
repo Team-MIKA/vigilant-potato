@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Integrator.Features.Settings;
+using Integrator.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace Integrator
@@ -34,6 +36,10 @@ namespace Integrator
                 .EnableDetailedErrors()
             );
 
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient<ISettingsRepository, SettingsRepository>();
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
