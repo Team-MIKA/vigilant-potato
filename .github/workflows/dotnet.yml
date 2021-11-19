@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Move directory
-      run: cd integrator
+      run: ls -la
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
