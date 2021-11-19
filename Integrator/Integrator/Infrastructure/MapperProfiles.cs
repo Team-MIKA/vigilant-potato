@@ -8,9 +8,9 @@ using Integrator.Features.Settings.Models;
 
 namespace Integrator.Features.Settings.Mappings
 {
-    public class SettingsProfile : Profile
+    public class MapperProfiles : Profile
     {
-        public SettingsProfile()
+        public MapperProfiles()
         {
             CreateMap<Setting, SettingDTO>();
         }
