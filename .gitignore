@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+bin/
+obj/
+.env
+.vs/
+MariaDb/data/
