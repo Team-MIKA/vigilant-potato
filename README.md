@@ -7,6 +7,10 @@ This is the repository for group MIKA's P7 project
 
 
 ## Commands
+1 integrator nede
+```
+docker build . -t my-web-app -f .\Integrator\Dockerfile
+```
 
 ```
 dotnet ef migrations add "message"
