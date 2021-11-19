@@ -9,6 +9,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Integrator.Features.Settings
 {
+    [ApiController]
+    [Route("[controller]")]
     public class SettingsController : ControllerBase
     {
         private readonly ILogger<SettingsController> _logger;
@@ -29,6 +31,17 @@ namespace Integrator.Features.Settings
                     Id = setting.Id, 
                     Name = setting.Name
                 });
+        }
+        
+        [HttpGet("test/{id}")]
+        public SettingDTO GetById(string id)
+        {
+            var setting = _unitOfWork.Settings.GetById(id);
+            return new SettingDTO
+            {
+                Id = setting.Id,
+                Name = setting.Name
+            };
         }
     }
 }
