@@ -8,6 +8,14 @@ This is the repository for group MIKA's P7 project
 
 ## Commands
 
+```
+dotnet ef migrations add "message"
+```
+
+```
+dotnet ef database update
+```
+
 ### HTTPS (rider and windows)
 ```
 dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\Integrator.pfx -p mikapassword
