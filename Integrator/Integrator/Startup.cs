@@ -27,7 +27,7 @@ namespace Integrator
             services.AddAutoMapper(typeof(Startup));
 
             services.AddDbContext<IntegratorContext>(options => options
-                .UseMySql(Configuration.GetConnectionString("MariaDbDocker"), new MariaDbServerVersion(new Version(10, 6, 5)))
+                .UseMySql(Configuration.GetConnectionString("MariaDbDockerORIGINAL"), new MariaDbServerVersion(new Version(10, 6, 5)))
                 .LogTo(Console.WriteLine, LogLevel.Information)
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors()
@@ -37,6 +37,21 @@ namespace Integrator
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<ISettingsRepository, SettingsRepository>();
 
+            
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "Default",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000/",
+                            "https://localhost:3000/",
+                            "http://localhost:3000",
+                            "https://localhost:3000")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -57,6 +72,8 @@ namespace Integrator
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("Default");
 
             app.UseAuthorization();
 
