@@ -1,4 +1,5 @@
 ﻿using Integrator.Features.Settings;
+using Integrator.Features.Workspace;
 
 namespace Integrator.Infrastructure
 {
@@ -10,13 +11,17 @@ namespace Integrator.Infrastructure
         {
             _context = context;
             Settings = new SettingsRepository(_context);
+            Workspace = new WorkspaceRepository(_context);
         }
+
         public void Dispose()
         {
             _context.Dispose();
         }
 
         public ISettingsRepository Settings { get; private set; }
+        public IWorkspaceRepository Workspace { get; private set; }
+
         public int Complete()
         {
             return _context.SaveChanges();
