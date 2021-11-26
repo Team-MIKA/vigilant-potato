@@ -5,7 +5,7 @@ using Integrator.Infrastructure;
 
 namespace Integrator.Features.Workspace
 {
-    public class WorkspaceRepository : GenericRepository<Setting>, IWorkspaceRepository
+    public class WorkspaceRepository : GenericRepository<Workspace>, IWorkspaceRepository
     {
         public WorkspaceRepository(IntegratorContext context) : base(context)
         {
