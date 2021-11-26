@@ -1,4 +1,5 @@
 ﻿using Integrator.Features.Settings.Models;
+using Integrator.Features.Workspaces.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Integrator
@@ -17,7 +18,7 @@ namespace Integrator
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder)
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Workspace>(entity => 
             { 

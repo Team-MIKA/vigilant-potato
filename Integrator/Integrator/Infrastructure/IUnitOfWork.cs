@@ -1,6 +1,6 @@
 ﻿using System;
 using Integrator.Features.Settings;
-using Integrator.Features.Workspace;
+using Integrator.Features.Workspaces;
 
 namespace Integrator.Infrastructure
 {

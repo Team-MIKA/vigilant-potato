@@ -1,12 +1,13 @@
+using System.Collections.Generic;
 using Integrator.Infrastructure;
 
-namespace Integrator.Features.Workspace.Models
+namespace Integrator.Features.Workspaces.Models
 {
     public class Workspace : BaseEntity
     {
         public Workspace ()
 	    {
-            Widgets = new HashSet<Widget>();
+            Widgets = new HashSet<WorkspaceWidget>();
 	    }
 
         public string Title { get; set; }

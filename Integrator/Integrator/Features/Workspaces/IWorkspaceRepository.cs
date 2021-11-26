@@ -1,7 +1,7 @@
-using Integrator.Features.Workspace.Models;
+using Integrator.Features.Workspaces.Models;
 using Integrator.Infrastructure;
 
-namespace Integrator.Features.Workspace
+namespace Integrator.Features.Workspaces
 {
     public interface IWorkspaceRepository : IGenericRepository<Workspace>
     {

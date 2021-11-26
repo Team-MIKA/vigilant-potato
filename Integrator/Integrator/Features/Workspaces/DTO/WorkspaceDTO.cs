@@ -1,4 +1,6 @@
-namespace Integrator.Features.Workspace.DTO
+using System.Collections.Generic;
+
+namespace Integrator.Features.Workspaces.DTO
 {
     public class WorkspaceDTO
     {

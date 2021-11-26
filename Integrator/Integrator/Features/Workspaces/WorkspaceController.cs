@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Integrator.Features.Workspace.DTO;
-using Integrator.Features.Workspace.Models;
+using Integrator.Features.Workspaces.DTO;
+using Integrator.Features.Workspaces.Models;
 using Integrator.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Integrator.Features.Workspace
+namespace Integrator.Features.Workspaces
 {
     [ApiController]
     [Route("[controller]")]
@@ -41,27 +41,29 @@ namespace Integrator.Features.Workspace
         {
             var workspace = _unitOfWork.Workspace.GetById(id);
 
-            var workspaceDTO = _mapper.Map<WorkspaceDTO>(workspace);
+            var workspaceDto = _mapper.Map<WorkspaceDTO>(workspace);
 
-            return workspaceDTO;
+            return workspaceDto;
         }
 
         [HttpPost("workspace")]
-        public string CreateWorkspace([FromBody] WorkspaceDTO workspaceDTO)
+        public string CreateWorkspace([FromBody] WorkspaceDTO workspaceDto)
         {
-            var workspace = _mapper.Map<Workspace>(workspaceDTO);
+            var workspace = _mapper.Map<Workspace>(workspaceDto);
 
             _unitOfWork.Workspace.Insert(workspace);
            
             return workspace.Id;
         }
 
-        [HttpDelete("workspace/{id}")]
-        public WorkspaceDTO DeleteWorkspace(string id)
+        [HttpDelete("workspace")]
+        public string DeleteWorkspace([FromBody] WorkspaceDTO workspaceDto)
         {
-            _unitOfWork.Workspace.Delete(id);
+            var workspace = _mapper.Map<Workspace>(workspaceDto);
+            
+            _unitOfWork.Workspace.Delete(workspace);
 
-            return id;
+            return workspaceDto.Id;
         }
 
         //[HttpPost("workspace/{id}")]

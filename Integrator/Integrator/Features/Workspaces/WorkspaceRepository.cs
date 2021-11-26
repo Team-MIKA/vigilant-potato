@@ -1,9 +1,7 @@
-using System.Linq;
-using System.Runtime.CompilerServices;
-using Integrator.Features.Workspace.Models;
+using Integrator.Features.Workspaces.Models;
 using Integrator.Infrastructure;
 
-namespace Integrator.Features.Workspace
+namespace Integrator.Features.Workspaces
 {
     public class WorkspaceRepository : GenericRepository<Workspace>, IWorkspaceRepository
     {
