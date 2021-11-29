@@ -8,7 +8,7 @@ namespace Integrator.Infrastructure
     {
         public MapperProfiles()
         {
-            CreateMap<Setting, SettingDTO>();
+            CreateMap<Setting, SettingDTO>().ReverseMap();
         }
     }
 }
