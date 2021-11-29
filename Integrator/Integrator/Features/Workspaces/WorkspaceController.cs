@@ -78,13 +78,13 @@ namespace Integrator.Features.Workspaces
             return Ok(workspaceDto.Id);
         }
 
-        [HttpPost("[action]")]
+        [HttpPut("[action]")]
         public async Task<IActionResult> AddWidgetToWorkspace([FromBody] WorkspaceDTO workspaceDto)
         {
             if (!ModelState.IsValid) throw new Exception("Error adding widget to workspace: " + workspaceDto.Id);
             
             var workspace = _mapper.Map<Workspace>(workspaceDto);
-            _unitOfWork.Workspaces.Insert(workspace);
+            _unitOfWork.Workspaces.Update(workspace);
             _unitOfWork.Complete();
 
             return Ok(workspaceDto.Id);

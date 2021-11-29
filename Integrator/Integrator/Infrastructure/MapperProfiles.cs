@@ -26,7 +26,6 @@ namespace Integrator.Infrastructure
             
             CreateMap<WidgetDTO, WorkspaceWidget>()
                 .ForMember(dest => dest.Id, act => act.Ignore())
-                .ForMember(dest => dest.Widget, act => act.Ignore())
                 .ForMember(dest => dest.WidgetId, opt => opt
                     .MapFrom(src => src.Id));
             
@@ -34,7 +33,6 @@ namespace Integrator.Infrastructure
             
             CreateMap<WorkspaceDTO, WorkspaceWidget>()
                 .ForMember(dest => dest.Id, act => act.Ignore())
-                .ForMember(dest => dest.Workspace, act => act.Ignore())
                 .ForMember(dest => dest.WorkspaceId, opt => opt
                     .MapFrom(src => src.Id));
 
