@@ -1,12 +1,36 @@
-﻿using Integrator.Features.Settings.DTO;
+﻿using System.Collections;
+using System.Collections.Generic;
+using AutoMapper;
+using Integrator.Features.Settings.DTO;
+using Integrator.Features.Settings.Models;
+using Integrator.Infrastructure;
 
 namespace Integrator.Features.Settings
 {
     public class SettingsService : ISettingsService
     {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+
+        public SettingsService(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
         public void CreateSetting(SettingDTO setting)
         {
-            throw new System.NotImplementedException();
+            _unitOfWork.Settings.Insert(_mapper.Map<Setting>(setting));
+            _unitOfWork.Complete();
+        }
+
+        public IEnumerable<SettingDTO> GetSettings()
+        {
+            return _mapper.Map<IEnumerable<SettingDTO>>(_unitOfWork.Settings.ListAll());
+        }
+
+        public SettingDTO GetById(string id)
+        {
+            return _mapper.Map<SettingDTO>(_unitOfWork.Settings.GetById(id));
         }
     }
 }

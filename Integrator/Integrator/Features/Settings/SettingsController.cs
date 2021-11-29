@@ -15,37 +15,24 @@ namespace Integrator.Features.Settings
     public class SettingsController : ControllerBase
     {
         private readonly ILogger<SettingsController> _logger;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+        private readonly ISettingsService _settingsService;
 
-        public SettingsController(ILogger<SettingsController> logger, IUnitOfWork unitOfWork, IMapper mapper)
+        public SettingsController(ILogger<SettingsController> logger, ISettingsService settingsService)
         {
             _logger = logger;
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            _settingsService = settingsService;
         }
         
         [HttpGet]
-        public IEnumerable<SettingDTO> Get()
+        public ActionResult<IEnumerable<SettingDTO>> Get()
         {
-            return _unitOfWork.Settings.ListAll()
-                .Select(setting => new SettingDTO
-                {
-                    Id = setting.Id, 
-                    Name = setting.Name
-                });
+            return Ok(_settingsService.GetSettings());
         }
 
         [HttpGet("test/{id}")]
-        public SettingDTO GetById(string id)
+        public ActionResult<SettingDTO> GetById(string id)
         {
-            var setting = _unitOfWork.Settings.GetById(id);
-
-            var settingDTO = _mapper.Map<SettingDTO>(setting);
-
-            return settingDTO;
-
-
+            return Ok(_settingsService.GetById(id));
         }
     }
 }
