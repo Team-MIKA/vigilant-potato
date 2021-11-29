@@ -24,7 +24,7 @@ namespace Integrator.Infrastructure
         public ISettingsRepository Settings { get; private set; }
         public IWorkspaceRepository Workspace { get; private set; }
 
-        public IWorkspaceRepository Widget { get; private set; }
+        public IWidgetRepository Widget { get; private set; }
 
         public int Complete()
         {

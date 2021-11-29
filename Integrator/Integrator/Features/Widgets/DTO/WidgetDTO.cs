@@ -1,4 +1,4 @@
-namespace Integrator.Features.Workspaces.DTO
+namespace Integrator.Features.Widgets.DTO
 {
     public class WidgetDTO
     {

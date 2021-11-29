@@ -1,4 +1,5 @@
 ﻿using Integrator.Features.Settings.Models;
+using Integrator.Features.Widgets.Models;
 using Integrator.Features.Workspaces.Models;
 using Microsoft.EntityFrameworkCore;
 
