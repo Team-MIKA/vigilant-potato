@@ -1,10 +1,9 @@
 ﻿using System.Net;
-using Integrator.Infrastructure.ErrorHandling;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 
-namespace Integrator.Infrastructure.Extensions
+namespace Integrator.Infrastructure.ErrorHandling
 {
     public static class ExceptionHandler
     {
