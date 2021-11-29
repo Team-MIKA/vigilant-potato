@@ -23,7 +23,7 @@ namespace Integrator.Infrastructure
             
             
             CreateMap<WorkspaceWidget, WidgetDTO>()
-                .IncludeMembers(src => src.Widget)'
+                .IncludeMembers(src => src.Widget)
                 .ReverseMap()
                 .ForMember(dst => dst.Id, act => act.Ignore());
 
