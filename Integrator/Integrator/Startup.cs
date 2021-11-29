@@ -36,6 +36,7 @@ namespace Integrator
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<ISettingsRepository, SettingsRepository>();
+            services.AddTransient<ISettingsService, SettingsService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

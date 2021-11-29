@@ -33,5 +33,14 @@ namespace Integrator.Features.Settings
             _logger.Log(LogLevel.Information, "Get setting by id");
             return Ok(_settingsService.GetById(id));
         }
+        
+        [HttpPost]
+        public ActionResult<bool> Insert([FromBody] SettingDTO setting)
+        {
+            // log er blot test
+            _logger.Log(LogLevel.Information, "Create new setting");
+            _settingsService.CreateSetting(setting);
+            return Ok(true);
+        }
     }
 }
