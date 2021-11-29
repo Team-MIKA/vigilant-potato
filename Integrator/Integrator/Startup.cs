@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
+using Integrator.Features.TimeSmart;
 
 namespace Integrator
 {
@@ -36,6 +37,7 @@ namespace Integrator
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<ISettingsRepository, SettingsRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

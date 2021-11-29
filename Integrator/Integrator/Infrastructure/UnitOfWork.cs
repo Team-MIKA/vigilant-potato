@@ -1,4 +1,5 @@
 ﻿using Integrator.Features.Settings;
+using Integrator.Features.TimeSmart;
 
 namespace Integrator.Infrastructure
 {
@@ -10,13 +11,16 @@ namespace Integrator.Infrastructure
         {
             _context = context;
             Settings = new SettingsRepository(_context);
+            Categories = new CategoryRepository(_context);
         }
         public void Dispose()
         {
             _context.Dispose();
         }
 
-        public ISettingsRepository Settings { get; private set; }
+        public ISettingsRepository Settings { get; }
+        public ICategoryRepository Categories { get; }
+
         public int Complete()
         {
             return _context.SaveChanges();
