@@ -22,22 +22,17 @@ namespace Integrator.Infrastructure
             CreateMap<Workspace, WorkspaceDTO>().ForMember(dst => dst.Widgets, opt => opt.MapFrom(src => src.Widgets)).ReverseMap();
             
             
-            CreateMap<WorkspaceWidget, WidgetDTO>().IncludeMembers(src => src.Widget);
-            
-            CreateMap<WidgetDTO, WorkspaceWidget>()
-                .ForMember(dest => dest.Id, act => act.Ignore())
-                .ForMember(dest => dest.Widget, act => act.Ignore())
-                .ForMember(dest => dest.WidgetId, opt => opt
-                    .MapFrom(src => src.Id));
-            
-            CreateMap<WorkspaceWidget, WorkspaceDTO>().IncludeMembers(src => src.Workspace);
-            
-            CreateMap<WorkspaceDTO, WorkspaceWidget>()
-                .ForMember(dest => dest.Id, act => act.Ignore())
-                .ForMember(dest => dest.Workspace, act => act.Ignore())
-                .ForMember(dest => dest.WorkspaceId, opt => opt
-                    .MapFrom(src => src.Id));
+            CreateMap<WorkspaceWidget, WidgetDTO>()
+                .IncludeMembers(src => src.Widget)'
+                .ReverseMap()
+                .ForMember(dst => dst.Id, act => act.Ignore());
 
+            
+            CreateMap<WorkspaceWidget, WorkspaceDTO>()
+                .IncludeMembers(src => src.Workspace)
+                .ReverseMap()
+                .ForMember(dst => dst.Id, act => act.Ignore());
+            
             
             
             // CreateMap<WidgetDTO, WorkspaceWidget>().ForSourceMember()
