@@ -30,7 +30,7 @@ namespace Integrator.Features.Widgets
         {
             var widget = _mapper.Map<Widget>(widgetDto);
 
-            _unitOfWork.Widget.Insert(widget);
+            _unitOfWork.Widgets.Insert(widget);
 
             return widget.Id;
         }
