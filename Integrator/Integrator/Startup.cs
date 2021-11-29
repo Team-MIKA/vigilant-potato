@@ -1,14 +1,10 @@
-using Integrator.Features.Settings;
-using Integrator.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
+using Integrator.Infrastructure.Extensions;
 
 namespace Integrator
 {
@@ -26,31 +22,9 @@ namespace Integrator
         {
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddDbContext<IntegratorContext>(options => options
-                .UseMySql(Configuration.GetConnectionString("MariaDbDockerORIGINAL"), new MariaDbServerVersion(new Version(10, 6, 5)))
-                .LogTo(Console.WriteLine, LogLevel.Information)
-                .EnableSensitiveDataLogging()
-                .EnableDetailedErrors()
-            );
-
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddTransient<ISettingsRepository, SettingsRepository>();
-
-            
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: "Default",
-                    builder =>
-                    {
-                        builder.WithOrigins("http://localhost:3000/",
-                            "https://localhost:3000/",
-                            "http://localhost:3000",
-                            "https://localhost:3000")
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
-                    });
-            });
+            services.ConfigureDatabase(Configuration.GetConnectionString("MariaDbDockerORIGINAL"));
+            services.ConfigureServices();
+            services.ConfigureCors();
             
             services.AddControllers();
             services.AddSwaggerGen(c =>
