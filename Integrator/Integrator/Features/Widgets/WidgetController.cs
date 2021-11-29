@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using AutoMapper;
-using Integrator.Features.Workspaces.DTO;
+using Integrator.Features.Widgets.DTO;
+using Integrator.Features.Widgets.Models;
 using Integrator.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -27,7 +26,7 @@ namespace Integrator.Features.Widgets
         [HttpPost("Widget")]
         public string CreateWidget([FromBody] WidgetDTO widgetDto)
         {
-            var widget = _mapper.Map<WidgetDTO>(widgetDto);
+            var widget = _mapper.Map<Widget>(widgetDto);
 
             _unitOfWork.Widget.Insert(widget);
 

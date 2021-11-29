@@ -1,4 +1,5 @@
-﻿using Integrator.Infrastructure;
+﻿using Integrator.Features.Widgets.Models;
+using Integrator.Infrastructure;
 
 namespace Integrator.Features.Widgets
 {

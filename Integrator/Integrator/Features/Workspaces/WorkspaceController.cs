@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using Integrator.Features.Widgets.DTO;
 using Integrator.Features.Workspaces.DTO;
 using Integrator.Features.Workspaces.Models;
 using Integrator.Infrastructure;
@@ -78,16 +79,6 @@ namespace Integrator.Features.Workspaces
 
         //    return id;
         //}
-
-        [HttpPost("workspace")]
-        public string CreateWidget([FromBody] WidgetDTO widgetDto)
-        {
-            var widget = _mapper.Map<WidgetDTO>(widgetDto);
-
-            _unitOfWork.Widget.Insert(widget);
-
-            return widget.Id;
-        }
 
     }
 }

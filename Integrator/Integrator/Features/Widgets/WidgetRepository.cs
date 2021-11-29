@@ -1,4 +1,5 @@
-﻿using Integrator.Features.Workspaces.Models;
+﻿using Integrator.Features.Widgets.Models;
+using Integrator.Features.Workspaces.Models;
 using Integrator.Infrastructure;
 
 namespace Integrator.Features.Widgets

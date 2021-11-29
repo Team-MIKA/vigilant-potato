@@ -1,6 +1,6 @@
 using Integrator.Infrastructure;
 
-namespace Integrator.Features.Workspaces.Models
+namespace Integrator.Features.Widgets.Models
 {
     public class Widget : BaseEntity
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using Integrator.Features.Settings;
+using Integrator.Features.Widgets;
 using Integrator.Features.Workspaces;
 
 namespace Integrator.Infrastructure
@@ -9,7 +10,7 @@ namespace Integrator.Infrastructure
         ISettingsRepository Settings { get;  }
         IWorkspaceRepository Workspace { get;  }
 
-        IWorkspaceRepository Widget { get; }
+        IWidgetRepository Widget { get; }
         int Complete();
     }
 }

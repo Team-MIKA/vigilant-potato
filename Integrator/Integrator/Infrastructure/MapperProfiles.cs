@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Integrator.Features.Settings.DTO;
 using Integrator.Features.Settings.Models;
+using Integrator.Features.Widgets.DTO;
+using Integrator.Features.Widgets.Models;
 using Integrator.Features.Workspaces.DTO;
 using Integrator.Features.Workspaces.Models;
 
