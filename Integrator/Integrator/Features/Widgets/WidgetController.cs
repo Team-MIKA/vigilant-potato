@@ -28,41 +28,57 @@ namespace Integrator.Features.Widgets
         }
 
         [HttpPost("[action]")]
-        public string CreateWidget([FromBody] WidgetDTO widgetDto)
+        public async Task<IActionResult> CreateWidget([FromBody] WidgetDTO widgetDto)
         {
-            var widget = _mapper.Map<Widget>(widgetDto);
+            if (ModelState.IsValid)
+            {
+                var widget = _mapper.Map<Widget>(widgetDto);
 
-            _unitOfWork.Widgets.Insert(widget);
+                _unitOfWork.Widgets.Insert(widget);
 
-            _unitOfWork.Complete();
+                _unitOfWork.Complete();
 
-            return widget.Id;
+                return Ok(widget.Id);
+            }
 
+            throw new Exception("Error creating widget");
 
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<WidgetDTO> ListWidgets()
+        public async Task<IActionResult> ListWidgets()
         {
-            return _unitOfWork.Widgets.ListAll()
-                .Select(widget => new WidgetDTO
-                {
-                    Id = widget.Id,
-                    Title = widget.Title,
-                });
+
+            if (ModelState.IsValid)
+            {
+                var res = _unitOfWork.Widgets.ListAll()
+                    .Select(widget => new WidgetDTO
+                    {
+                        Id = widget.Id,
+                        Title = widget.Title,
+                    });
+
+                return Ok(res);
+            }
+
+            throw new Exception("Error retrieving a list of widgets");
+
         }
 
         [HttpDelete("[action]/{id}")]
-        public string DeleteWidget(string id)
+        public async Task<IActionResult> DeleteWidget(string id)
         {
-           
-            var widget = new Widget { Id = id };
-            _unitOfWork.Widgets.Delete(widget);
-            _unitOfWork.Complete();
-            
-            
-            return id;
+            if (ModelState.IsValid)
+            {
+                var widget = new Widget { Id = id };
+                _unitOfWork.Widgets.Delete(widget);
+                _unitOfWork.Complete();
 
+                return Ok(id);
+            }
+            
+            throw new Exception("Error deleting widget: " + id);
+            
         }
 
     }
