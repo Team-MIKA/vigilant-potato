@@ -1,4 +1,5 @@
 ﻿
+using System;
 using AutoMapper;
 using Integrator.Features.Widgets.DTO;
 using Integrator.Features.Widgets.Models;
@@ -29,33 +30,52 @@ namespace Integrator.Features.Widgets
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateWidget([FromBody] WidgetDTO widgetDto)
         {
-            var widget = _mapper.Map<Widget>(widgetDto);
+            if (ModelState.IsValid)
+            {
+                var widget = _mapper.Map<Widget>(widgetDto);
 
-            _unitOfWork.Widgets.Insert(widget);
+                _unitOfWork.Widgets.Insert(widget);
 
-            return Ok(widget.Id);
+                return Ok(widget.Id);
+            }
+
+            throw new Exception("Error creating widget");
+
         }
 
         [HttpGet("[action]")]
         public async Task<IActionResult> ListWidgets()
         {
-            var res = _unitOfWork.Widgets.ListAll()
-                .Select(widget => new WidgetDTO
-                {
-                    Id = widget.Id,
-                    Title = widget.Title,
-                });
 
-            return Ok(res);
+            if (ModelState.IsValid)
+            {
+                var res = _unitOfWork.Widgets.ListAll()
+                    .Select(widget => new WidgetDTO
+                    {
+                        Id = widget.Id,
+                        Title = widget.Title,
+                    });
+
+                return Ok(res);
+            }
+
+            throw new Exception("Error retrieving a list of widgets");
+
         }
 
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> DeleteWidget(string id)
         {
-            var widget = new Widget { Id = id };
-            _unitOfWork.Widgets.Delete(widget);
+            if (ModelState.IsValid)
+            {
+                var widget = new Widget { Id = id };
+                _unitOfWork.Widgets.Delete(widget);
 
-            return Ok(id);
+                return Ok(id);
+            }
+            
+            throw new Exception("Error deleting widget: " + id);
+            
         }
 
     }
