@@ -5,6 +5,8 @@ using Integrator.Features.Widgets.Models;
 using Integrator.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Integrator.Features.Widgets
 {
@@ -31,6 +33,27 @@ namespace Integrator.Features.Widgets
             _unitOfWork.Widget.Insert(widget);
 
             return widget.Id;
+        }
+
+        [HttpGet]
+        public IEnumerable<WidgetDTO> ListWidgets()
+        {
+            return _unitOfWork.Widget.ListAll()
+                .Select(widget => new WidgetDTO
+                {
+                    Id = widget.Id,
+                    Title = widget.Title,
+                });
+        }
+
+        [HttpDelete("widget")]
+        public string DeleteWidget([FromBody] WidgetDTO widgetDto)
+        {
+            var widget = _mapper.Map<Widget>(widgetDto);
+
+            _unitOfWork.Widget.Delete(widget);
+
+            return widgetDto.Id;
         }
 
     }
