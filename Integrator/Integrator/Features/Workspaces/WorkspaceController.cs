@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Integrator.Features.Widgets.DTO;
 using Integrator.Features.Workspaces.DTO;
@@ -27,60 +28,67 @@ namespace Integrator.Features.Workspaces
         }
 
         [HttpGet]
-        public IEnumerable<WorkspaceDTO> ListWorkspaces()
+        public async Task<IActionResult> ListWorkspaces()
         {
-            return _unitOfWork.Workspaces.ListAll()
+            if (!ModelState.IsValid) throw new Exception("Error retrieving list of workspaces");
+            
+            var res = _unitOfWork.Workspaces.ListAll()
                 .Select(workspace => new WorkspaceDTO
                 {
                     Id = workspace.Id,
                     Title = workspace.Title,
                 });
+            return Ok(res);
+
         }
 
         [HttpGet("workspace/{id}")]
-        public WorkspaceDTO GetById(string id)
+        public async Task<IActionResult> GetById(string id)
         {
+            
+            if (!ModelState.IsValid) throw new Exception("Error getting workspace by id: " + id);
             var workspace = _unitOfWork.Workspaces.GetById(id);
 
             var workspaceDto = _mapper.Map<WorkspaceDTO>(workspace);
 
-            return workspaceDto;
+            return Ok(workspaceDto);
         }
 
         [HttpPost("workspace")]
-        public string CreateWorkspace([FromBody] WorkspaceDTO workspaceDto)
+        public async Task<IActionResult> CreateWorkspace([FromBody] WorkspaceDTO workspaceDto)
         {
+            if (!ModelState.IsValid) throw new Exception("Error creating workspace");
             var workspace = _mapper.Map<Workspace>(workspaceDto);
 
             _unitOfWork.Workspaces.Insert(workspace);
             _unitOfWork.Complete();
            
-            return workspace.Id;
+            return Ok(workspace.Id);
         }
 
         [HttpDelete("workspace")]
-        public string DeleteWorkspace([FromBody] WorkspaceDTO workspaceDto)
+        public async Task<IActionResult> DeleteWorkspace([FromBody] WorkspaceDTO workspaceDto)
         {
+            if (!ModelState.IsValid) throw new Exception("Error deleting workspace: " + workspaceDto.Id);
             var workspace = _mapper.Map<Workspace>(workspaceDto);
             
             _unitOfWork.Workspaces.Delete(workspace);
             _unitOfWork.Complete();
 
-            return workspaceDto.Id;
+            return Ok(workspaceDto.Id);
         }
 
-        //[HttpPost("workspace/{id}")]
-        //public string AddWidgetToWorkspace([FromBody] WidgetDTO widgetDTO, string id)
-        //{
-        //    var workspaceWidget = new WorkspaceWidget
-        //    {
-        //        WidgetId = widgetDTO.Id,
-        //        WorkspaceId = id,
-        //    }
-        //    _unitOfWork.Workspace.Insert(workspaceWidget);
+        [HttpPost("workspace")]
+        public async Task<IActionResult> AddWidgetToWorkspace([FromBody] WorkspaceDTO workspaceDto)
+        {
+           
+            if (!ModelState.IsValid) throw new Exception("Error adding widget to workspace: " + workspaceDto.Id);
+            var workspace = _mapper.Map<Workspace>(workspaceDto);
+            _unitOfWork.Workspaces.Insert(workspace);
+            _unitOfWork.Complete();
 
-        //    return id;
-        //}
+            return Ok(workspaceDto.Id);
+        }
 
     }
 }
