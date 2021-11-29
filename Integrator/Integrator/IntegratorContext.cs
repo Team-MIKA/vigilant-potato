@@ -1,4 +1,5 @@
 ﻿using Integrator.Features.Settings.Models;
+using Integrator.Features.TimeSmart.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Integrator
@@ -11,5 +12,7 @@ namespace Integrator
         }
 
         public virtual DbSet<Setting> Settings { get; set; }
+        public virtual DbSet<RegistrationCategory> RegistrationCategories { get; set; }
+        public virtual DbSet<Registration> Registrations { get; set; }
     }
 }
