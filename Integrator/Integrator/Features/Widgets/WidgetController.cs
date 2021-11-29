@@ -38,7 +38,7 @@ namespace Integrator.Features.Widgets
         [HttpGet]
         public IEnumerable<WidgetDTO> ListWidgets()
         {
-            return _unitOfWork.Widget.ListAll()
+            return _unitOfWork.Widgets.ListAll()
                 .Select(widget => new WidgetDTO
                 {
                     Id = widget.Id,
@@ -50,7 +50,7 @@ namespace Integrator.Features.Widgets
         public string DeleteWidget(string id)
         {
             var widget = new Widget { Id = id };
-            _unitOfWork.Widget.Delete(widget);
+            _unitOfWork.Widgets.Delete(widget);
 
             return id;
         }
