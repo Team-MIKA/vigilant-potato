@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Integrator.Features.Widgets.DTO;
+using Integrator.Features.Widgets.Models;
 using Integrator.Features.Workspaces.DTO;
 using Integrator.Features.Workspaces.Models;
 using Integrator.Infrastructure;
@@ -78,16 +79,28 @@ namespace Integrator.Features.Workspaces
             return Ok(workspaceDto.Id);
         }
 
-        [HttpPut("[action]")]
-        public async Task<IActionResult> AddWidgetToWorkspace([FromBody] WorkspaceDTO workspaceDto)
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> AddWidgetToWorkspace([FromBody] WidgetDTO widgetDto, string id)
         {
-            if (!ModelState.IsValid) throw new Exception("Error adding widget to workspace: " + workspaceDto.Id);
+            if (!ModelState.IsValid) throw new Exception("Error adding widget: " + widgetDto.Id + " to workspace: " + id);
             
-            var workspace = _mapper.Map<Workspace>(workspaceDto);
-            _unitOfWork.Workspaces.Update(workspace);
+            var widget = _mapper.Map<Widget>(widgetDto);
+            _unitOfWork.Workspaces.AddWidgetToWorkspace(widget, id);
             _unitOfWork.Complete();
 
-            return Ok(workspaceDto.Id);
+            return Ok(id);
+        }
+        
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> RemoveWidgetFromWorkspace([FromBody] string widgetId, string id)
+        {
+            if (!ModelState.IsValid) throw new Exception("Error adding widget: " + widgetId + " to workspace: " + id);
+            
+            
+            _unitOfWork.Workspaces.RemoveWidgetFromWorkspace(widgetId, id);
+            _unitOfWork.Complete();
+
+            return Ok(id);
         }
 
     }
