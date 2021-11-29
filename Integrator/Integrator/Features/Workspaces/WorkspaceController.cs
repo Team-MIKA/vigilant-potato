@@ -42,7 +42,7 @@ namespace Integrator.Features.Workspaces
 
         }
 
-        [HttpGet("workspace/{id}")]
+        [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             
@@ -54,7 +54,7 @@ namespace Integrator.Features.Workspaces
             return Ok(workspaceDto);
         }
 
-        [HttpPost("workspace")]
+        [HttpPost("[action]")]
         public async Task<IActionResult> CreateWorkspace([FromBody] WorkspaceDTO workspaceDto)
         {
             if (!ModelState.IsValid) throw new Exception("Error creating workspace");
@@ -66,7 +66,7 @@ namespace Integrator.Features.Workspaces
             return Ok(workspace.Id);
         }
 
-        [HttpDelete("workspace")]
+        [HttpDelete("[action]")]
         public async Task<IActionResult> DeleteWorkspace([FromBody] WorkspaceDTO workspaceDto)
         {
             if (!ModelState.IsValid) throw new Exception("Error deleting workspace: " + workspaceDto.Id);
@@ -78,11 +78,11 @@ namespace Integrator.Features.Workspaces
             return Ok(workspaceDto.Id);
         }
 
-        [HttpPost("workspace")]
+        [HttpPost("[action]")]
         public async Task<IActionResult> AddWidgetToWorkspace([FromBody] WorkspaceDTO workspaceDto)
         {
-           
             if (!ModelState.IsValid) throw new Exception("Error adding widget to workspace: " + workspaceDto.Id);
+            
             var workspace = _mapper.Map<Workspace>(workspaceDto);
             _unitOfWork.Workspaces.Insert(workspace);
             _unitOfWork.Complete();
