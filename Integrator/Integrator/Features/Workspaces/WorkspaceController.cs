@@ -78,5 +78,16 @@ namespace Integrator.Features.Workspaces
 
         //    return id;
         //}
+
+        [HttpPost("workspace")]
+        public string CreateWidget([FromBody] WidgetDTO widgetDto)
+        {
+            var widget = _mapper.Map<WidgetDTO>(widgetDto);
+
+            _unitOfWork.Widget.Insert(widget);
+
+            return widget.Id;
+        }
+
     }
 }

@@ -8,6 +8,8 @@ namespace Integrator.Infrastructure
     {
         ISettingsRepository Settings { get;  }
         IWorkspaceRepository Workspace { get;  }
+
+        IWorkspaceRepository Widget { get; }
         int Complete();
     }
 }

@@ -15,9 +15,11 @@ namespace Integrator.Features.Settings.Mappings
     {
         public MapperProfiles()
         {
-            CreateMap<Setting, SettingDTO>();
-            CreateMap<Workspace, WorkspaceDTO>();
-            CreateMap<Widget, WidgetDTO>();
+            CreateMap<Setting, SettingDTO>().ReverseMap();
+            CreateMap<Workspace, WorkspaceDTO>().ForMember(dst => dst.Widgets, opt => opt.MapFrom(src => src.Widgets)).ReverseMap();
+            CreateMap<WorkspaceWidget, WidgetDTO>().IncludeMembers(src => src.Widget).ReverseMap();
+            CreateMap<Widget, WidgetDTO>().ReverseMap();
+            
         }
     }
 }

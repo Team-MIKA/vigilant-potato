@@ -1,4 +1,5 @@
 ﻿using Integrator.Features.Settings;
+using Integrator.Features.Widgets;
 using Integrator.Features.Workspaces;
 
 namespace Integrator.Infrastructure
@@ -12,6 +13,7 @@ namespace Integrator.Infrastructure
             _context = context;
             Settings = new SettingsRepository(_context);
             Workspace = new WorkspaceRepository(_context);
+            Widget = new WidgetRepository(_context);
         }
 
         public void Dispose()
@@ -21,6 +23,8 @@ namespace Integrator.Infrastructure
 
         public ISettingsRepository Settings { get; private set; }
         public IWorkspaceRepository Workspace { get; private set; }
+
+        public IWorkspaceRepository Widget { get; private set; }
 
         public int Complete()
         {
