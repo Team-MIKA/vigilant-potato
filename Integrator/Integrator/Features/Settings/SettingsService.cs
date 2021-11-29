@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AutoMapper;
 using Integrator.Features.Settings.DTO;
 using Integrator.Features.Settings.Models;

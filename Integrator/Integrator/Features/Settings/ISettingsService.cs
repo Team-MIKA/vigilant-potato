@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Integrator.Features.Settings.DTO;
 
 namespace Integrator.Features.Settings

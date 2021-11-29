@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
+﻿using System.Collections.Generic;
 using Integrator.Features.Settings.DTO;
-using Integrator.Features.Settings.Models;
-using Integrator.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -26,12 +21,16 @@ namespace Integrator.Features.Settings
         [HttpGet]
         public ActionResult<IEnumerable<SettingDTO>> Get()
         {
+            // log er blot test
+            _logger.Log(LogLevel.Information, "Get all settings");
             return Ok(_settingsService.GetSettings());
         }
 
         [HttpGet("test/{id}")]
         public ActionResult<SettingDTO> GetById(string id)
         {
+            // log er blot test
+            _logger.Log(LogLevel.Information, "Get setting by id");
             return Ok(_settingsService.GetById(id));
         }
     }
