@@ -25,7 +25,7 @@ namespace Integrator.Features.Widgets
             _mapper = mapper;
         }
 
-        [HttpPost("Widget")]
+        [HttpPost("create")]
         public string CreateWidget([FromBody] WidgetDTO widgetDto)
         {
             var widget = _mapper.Map<Widget>(widgetDto);
@@ -46,14 +46,13 @@ namespace Integrator.Features.Widgets
                 });
         }
 
-        [HttpDelete("widget")]
-        public string DeleteWidget([FromBody] WidgetDTO widgetDto)
+        [HttpDelete("delete/{id}")]
+        public string DeleteWidget(string id)
         {
-            var widget = _mapper.Map<Widget>(widgetDto);
-
+            var widget = new Widget { Id = id };
             _unitOfWork.Widget.Delete(widget);
 
-            return widgetDto.Id;
+            return id;
         }
 
     }
