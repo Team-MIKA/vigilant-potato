@@ -53,6 +53,7 @@ namespace Integrator.Features.Workspaces
             var workspace = _mapper.Map<Workspace>(workspaceDto);
 
             _unitOfWork.Workspaces.Insert(workspace);
+            _unitOfWork.Complete();
            
             return workspace.Id;
         }
@@ -63,6 +64,7 @@ namespace Integrator.Features.Workspaces
             var workspace = _mapper.Map<Workspace>(workspaceDto);
             
             _unitOfWork.Workspaces.Delete(workspace);
+            _unitOfWork.Complete();
 
             return workspaceDto.Id;
         }

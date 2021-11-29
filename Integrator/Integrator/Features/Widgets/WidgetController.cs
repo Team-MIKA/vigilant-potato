@@ -36,6 +36,8 @@ namespace Integrator.Features.Widgets
 
                 _unitOfWork.Widgets.Insert(widget);
 
+                _unitOfWork.Complete();
+
                 return Ok(widget.Id);
             }
 
@@ -70,6 +72,7 @@ namespace Integrator.Features.Widgets
             {
                 var widget = new Widget { Id = id };
                 _unitOfWork.Widgets.Delete(widget);
+                _unitOfWork.Complete();
 
                 return Ok(id);
             }
