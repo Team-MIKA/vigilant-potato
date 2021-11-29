@@ -29,7 +29,7 @@ namespace Integrator.Features.Workspaces
         [HttpGet]
         public IEnumerable<WorkspaceDTO> ListWorkspaces()
         {
-            return _unitOfWork.Workspace.ListAll()
+            return _unitOfWork.Workspaces.ListAll()
                 .Select(workspace => new WorkspaceDTO
                 {
                     Id = workspace.Id,
@@ -40,7 +40,7 @@ namespace Integrator.Features.Workspaces
         [HttpGet("workspace/{id}")]
         public WorkspaceDTO GetById(string id)
         {
-            var workspace = _unitOfWork.Workspace.GetById(id);
+            var workspace = _unitOfWork.Workspaces.GetById(id);
 
             var workspaceDto = _mapper.Map<WorkspaceDTO>(workspace);
 
@@ -52,7 +52,7 @@ namespace Integrator.Features.Workspaces
         {
             var workspace = _mapper.Map<Workspace>(workspaceDto);
 
-            _unitOfWork.Workspace.Insert(workspace);
+            _unitOfWork.Workspaces.Insert(workspace);
            
             return workspace.Id;
         }
@@ -62,7 +62,7 @@ namespace Integrator.Features.Workspaces
         {
             var workspace = _mapper.Map<Workspace>(workspaceDto);
             
-            _unitOfWork.Workspace.Delete(workspace);
+            _unitOfWork.Workspaces.Delete(workspace);
 
             return workspaceDto.Id;
         }

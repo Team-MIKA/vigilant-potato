@@ -8,9 +8,9 @@ namespace Integrator.Infrastructure
     public interface IUnitOfWork : IDisposable
     {
         ISettingsRepository Settings { get;  }
-        IWorkspaceRepository Workspace { get;  }
+        IWorkspaceRepository Workspaces { get;  }
 
-        IWidgetRepository Widget { get; }
+        IWidgetRepository Widgets { get; }
         int Complete();
     }
 }

@@ -12,8 +12,8 @@ namespace Integrator.Infrastructure
         {
             _context = context;
             Settings = new SettingsRepository(_context);
-            Workspace = new WorkspaceRepository(_context);
-            Widget = new WidgetRepository(_context);
+            Workspaces = new WorkspaceRepository(_context);
+            Widgets = new WidgetRepository(_context);
         }
 
         public void Dispose()
@@ -22,9 +22,9 @@ namespace Integrator.Infrastructure
         }
 
         public ISettingsRepository Settings { get; private set; }
-        public IWorkspaceRepository Workspace { get; private set; }
+        public IWorkspaceRepository Workspaces { get; private set; }
 
-        public IWidgetRepository Widget { get; private set; }
+        public IWidgetRepository Widgets { get; private set; }
 
         public int Complete()
         {
