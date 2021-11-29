@@ -11,7 +11,6 @@ namespace Integrator.Features.Workspaces.Models
 	    }
 
         public string Title { get; set; }
-        public string Id { get; set; }
         public ICollection<WorkspaceWidget> Widgets { get; set; }
     }
 
