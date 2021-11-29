@@ -37,6 +37,8 @@ namespace Integrator
             { 
                 entity.Property(e=>e.Id).HasMaxLength(128);
                 entity.Property(e=>e.Id).ValueGeneratedOnAdd();
+                entity.Property(e=>e.WorkspaceId).HasMaxLength(128);
+                entity.Property(e=>e.WidgetId).HasMaxLength(128);
             });
         }
 
