@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Integrator.Features.Widgets
 {
@@ -25,34 +26,36 @@ namespace Integrator.Features.Widgets
             _mapper = mapper;
         }
 
-        [HttpPost("create")]
-        public string CreateWidget([FromBody] WidgetDTO widgetDto)
+        [HttpPost("[action]")]
+        public async Task<IActionResult> CreateWidget([FromBody] WidgetDTO widgetDto)
         {
             var widget = _mapper.Map<Widget>(widgetDto);
 
             _unitOfWork.Widgets.Insert(widget);
 
-            return widget.Id;
+            return Ok(widget.Id);
         }
 
-        [HttpGet]
-        public IEnumerable<WidgetDTO> ListWidgets()
+        [HttpGet("[action]")]
+        public async Task<IActionResult> ListWidgets()
         {
-            return _unitOfWork.Widget.ListAll()
+            var res = _unitOfWork.Widgets.ListAll()
                 .Select(widget => new WidgetDTO
                 {
                     Id = widget.Id,
                     Title = widget.Title,
                 });
+
+            return Ok(res);
         }
 
-        [HttpDelete("delete/{id}")]
-        public string DeleteWidget(string id)
+        [HttpDelete("[action]/{id}")]
+        public async Task<IActionResult> DeleteWidget(string id)
         {
             var widget = new Widget { Id = id };
-            _unitOfWork.Widget.Delete(widget);
+            _unitOfWork.Widgets.Delete(widget);
 
-            return id;
+            return Ok(id);
         }
 
     }
