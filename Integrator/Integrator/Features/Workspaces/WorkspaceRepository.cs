@@ -33,8 +33,12 @@ namespace Integrator.Features.Workspaces
             _context.Set<WorkspaceWidget>().Remove(entity);
 
         }
-        
-        
+
+        public Workspace GetWorkspaceById(string id)
+        {
+            return _context.Workspaces.Include(prop => prop.Widgets).ThenInclude(prop => prop.Widget).First(w => w.Id.Equals(id));
+        }
+
 
     }
 }
