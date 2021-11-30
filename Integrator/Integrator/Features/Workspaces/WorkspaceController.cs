@@ -20,12 +20,14 @@ namespace Integrator.Features.Workspaces
         private readonly ILogger<WorkspaceController> _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IWorkspaceService _workspaceService;
 
-        public WorkspaceController(ILogger<WorkspaceController> logger, IUnitOfWork unitOfWork, IMapper mapper)
+        public WorkspaceController(ILogger<WorkspaceController> logger, IUnitOfWork unitOfWork, IMapper mapper, IWorkspaceService workspaceService)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _workspaceService = workspaceService;
         }
 
         [HttpGet]
@@ -44,13 +46,11 @@ namespace Integrator.Features.Workspaces
         }
 
         [HttpGet("[action]/{id}")]
-        public async Task<IActionResult> GetById(string id)
+        public IActionResult GetById(string id)
         {
-            
             if (!ModelState.IsValid) throw new Exception("Error getting workspace by id: " + id);
-            var workspace = _unitOfWork.Workspaces.GetWorkspaceById(id);
 
-            var workspaceDto = _mapper.Map<WorkspaceDTO>(workspace);
+            var workspaceDto = _workspaceService.GetById(id);
 
             return Ok(workspaceDto);
         }

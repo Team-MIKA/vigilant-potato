@@ -19,7 +19,10 @@ namespace Integrator.Infrastructure
         {
             CreateMap<Setting, SettingDTO>().ReverseMap();
             
-            CreateMap<Workspace, WorkspaceDTO>().ForMember(dst => dst.Widgets, opt => opt.MapFrom(src => src.Widgets)).ReverseMap();
+            CreateMap<Workspace, WorkspaceDTO>()
+                .ForMember(dst => dst.Widgets, opt => opt
+                    .MapFrom(src => src.Widgets))
+                .ReverseMap();
                        
             CreateMap<WorkspaceWidget, WidgetDTO>()
                 .IncludeMembers(src => src.Widget)
