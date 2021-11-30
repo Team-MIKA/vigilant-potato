@@ -55,8 +55,7 @@ namespace Integrator
                 app.UseCors(builder => builder
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials());
+                    .AllowAnyHeader());
             }
 
             app.UseHttpsRedirection();
