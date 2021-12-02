@@ -22,14 +22,14 @@ namespace Integrator.Features.Widgets
             _mapper = mapper;
         }
 
-        public Widget CreateWidget(WidgetDTO widgetDto)
+        public string CreateWidget(WidgetDTO widgetDto)
         {
             var widget = _mapper.Map<Widget>(widgetDto);
 
             _unitOfWork.Widgets.Insert(widget);
             _unitOfWork.Complete();
 
-            return widget;
+            return widget.Id;
         }
 
         public WidgetDTO DeleteWidget(WidgetDTO widgetDto)

@@ -35,9 +35,9 @@ namespace Integrator.Features.Widgets
         {
             if (!ModelState.IsValid) throw new Exception("Error creating widget");
 
-            var widget = _widgetService.CreateWidget(widgetDto);
+            var widgetId = _widgetService.CreateWidget(widgetDto);
 
-            return Ok(widget.Id);
+            return Ok(widgetId);
 
         }
 

@@ -9,7 +9,7 @@ namespace Integrator.Features.Widgets
 {
     public interface IWidgetService
     {
-        Widget CreateWidget(WidgetDTO widgetDto);
+        string CreateWidget(WidgetDTO widgetDto);
 
         IEnumerable <WidgetDTO> ListWidgets();
 
