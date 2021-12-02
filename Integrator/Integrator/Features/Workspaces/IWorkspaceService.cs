@@ -14,12 +14,12 @@ namespace Integrator.Features.Workspaces
 
         WorkspaceDTO GetById(string id);
 
-        Workspace CreateWorkspace([FromBody] WorkspaceDTO workspaceDto);
+        Workspace CreateWorkspace(WorkspaceDTO workspaceDto);
 
-        WorkspaceDTO DeleteWorkspace([FromBody] WorkspaceDTO workspaceDto);
+        WorkspaceDTO DeleteWorkspace(WorkspaceDTO workspaceDto);
 
-        string AddWidgetToWorkspace([FromBody] WidgetDTO widgetDto, string id);
+        string AddWidgetToWorkspace(WidgetDTO widgetDto, string id);
 
-        string RemoveWidgetFromWorkspace([FromBody] string widgetId, string id);
+        string RemoveWidgetFromWorkspace(string widgetId, string id);
     }
 }

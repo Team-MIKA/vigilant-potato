@@ -30,7 +30,7 @@ namespace Integrator.Features.Workspaces
             return workspaceDto;
         }
 
-        public string AddWidgetToWorkspace([FromBody] WidgetDTO widgetDto, string id)
+        public string AddWidgetToWorkspace(WidgetDTO widgetDto, string id)
         {
             var widget = _mapper.Map<Widget>(widgetDto);
             _unitOfWork.Workspaces.AddWidgetToWorkspace(widget, id);
@@ -39,7 +39,7 @@ namespace Integrator.Features.Workspaces
             return id;
         }
 
-        public Workspace CreateWorkspace([FromBody] WorkspaceDTO workspaceDto)
+        public Workspace CreateWorkspace(WorkspaceDTO workspaceDto)
         {
             var workspace = _mapper.Map<Workspace>(workspaceDto);
 
@@ -49,7 +49,7 @@ namespace Integrator.Features.Workspaces
             return workspace;
         }
 
-        public WorkspaceDTO DeleteWorkspace([FromBody] WorkspaceDTO workspaceDto)
+        public WorkspaceDTO DeleteWorkspace(WorkspaceDTO workspaceDto)
         {
             var workspace = _mapper.Map<Workspace>(workspaceDto);
 
@@ -59,7 +59,7 @@ namespace Integrator.Features.Workspaces
             return workspaceDto;
         }
 
-        public string RemoveWidgetFromWorkspace([FromBody] string widgetId, string id)
+        public string RemoveWidgetFromWorkspace(string widgetId, string id)
         {
             _unitOfWork.Workspaces.RemoveWidgetFromWorkspace(widgetId, id);
             _unitOfWork.Complete();
@@ -75,7 +75,8 @@ namespace Integrator.Features.Workspaces
                 Id = workspace.Id,
                 Title = workspace.Title,
             });
-                return res;
+
+            return res;
         }
     }
 }
