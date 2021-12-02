@@ -24,6 +24,10 @@ dotnet ef database update
 ```
 dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\Integrator.pfx -p mikapassword
 ```
+Trust certificates:
+linux: https://stackoverflow.com/questions/55485511/how-to-run-dotnet-dev-certs-https-trust
+windows: dotnet dev-certs https --trust
+
 
 ```
 dotnet user-secrets set "Kestrel:Certificates:Development:Password" "mikapassword"

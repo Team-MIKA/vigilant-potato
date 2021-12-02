@@ -7,10 +7,17 @@ services:
       - ./data:/var/lib/mysql
     ports:
       - 3306:3306
+    # networks:
+    #   - random
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
   adminer:
     image: adminer
     restart: always
+    # networks:
+    #   - random
     ports:
       - 8080:8080
+# networks:
+#   random:
+#     external: true
