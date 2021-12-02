@@ -3,14 +3,16 @@ using System;
 using Integrator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Integrator.Migrations
 {
     [DbContext(typeof(IntegratorContext))]
-    partial class IntegratorContextModelSnapshot : ModelSnapshot
+    [Migration("20211202104828_addedCascadingDeleteOnWorkspaces")]
+    partial class addedCascadingDeleteOnWorkspaces
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,29 +57,6 @@ namespace Integrator.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Widgets");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "a0cd214b-2067-47fc-9eaa-d3ac4b4f0353",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Timesmart Registration"
-                        },
-                        new
-                        {
-                            Id = "78iu214b-2067-47fc-9eaa-d3ac4b4f0352",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Timesmart List"
-                        },
-                        new
-                        {
-                            Id = "hy67214b-2067-47fc-9eaa-d3ac4b4f0351",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "SAP List"
-                        });
                 });
 
             modelBuilder.Entity("Integrator.Features.Workspaces.Models.Workspace", b =>
