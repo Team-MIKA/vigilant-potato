@@ -49,14 +49,14 @@ namespace Integrator.Features.Workspaces
             return workspace.Id;
         }
 
-        public string DeleteWorkspace(WorkspaceDTO workspaceDto)
+        public string DeleteWorkspace(string id)
         {
-            var workspace = _mapper.Map<Workspace>(workspaceDto);
+            //var workspace = _mapper.Map<Workspace>(workspaceDto);
 
-            _unitOfWork.Workspaces.Delete(workspace);
+            _unitOfWork.Workspaces.Delete(id);
             _unitOfWork.Complete();
 
-            return workspaceDto.Id;
+            return id;
         }
 
         public string RemoveWidgetFromWorkspace(string widgetId, string id)

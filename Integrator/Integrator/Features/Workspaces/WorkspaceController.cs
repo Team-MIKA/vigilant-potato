@@ -60,14 +60,14 @@ namespace Integrator.Features.Workspaces
             return Ok(id);
         }
 
-        [HttpDelete("[action]")]
-        public IActionResult DeleteWorkspace([FromBody] WorkspaceDTO workspaceDto)
+        [HttpDelete("[action]/{id}")]
+        public IActionResult DeleteWorkspace(string id)
         {
-            if (!ModelState.IsValid) throw new Exception("Error deleting workspace: " + workspaceDto.Id);
+            if (!ModelState.IsValid) throw new Exception("Error deleting workspace: " + id);
 
-            var id = _workspaceService.DeleteWorkspace(workspaceDto);
+            var deletedId = _workspaceService.DeleteWorkspace(id);
 
-            return Ok(id);
+            return Ok(deletedId);
         }
 
         [HttpPost("[action]/{id}")]
