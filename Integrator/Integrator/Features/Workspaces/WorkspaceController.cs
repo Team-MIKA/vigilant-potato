@@ -65,9 +65,9 @@ namespace Integrator.Features.Workspaces
         {
             if (!ModelState.IsValid) throw new Exception("Error deleting workspace: " + workspaceDto.Id);
 
-            var workspace = _workspaceService.DeleteWorkspace(workspaceDto);
+            var id = _workspaceService.DeleteWorkspace(workspaceDto);
 
-            return Ok(workspace.Id);
+            return Ok(id);
         }
 
         [HttpPost("[action]/{id}")]
