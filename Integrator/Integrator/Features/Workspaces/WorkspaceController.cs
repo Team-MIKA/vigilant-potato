@@ -30,7 +30,7 @@ namespace Integrator.Features.Workspaces
             _workspaceService = workspaceService;
         }
 
-        [HttpGet]
+        [HttpGet("[action]")]
         public IActionResult ListWorkspaces()
         {
             if (!ModelState.IsValid) throw new Exception("Error retrieving list of workspaces");
