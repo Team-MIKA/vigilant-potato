@@ -13,6 +13,7 @@ namespace Integrator.Infrastructure.Extensions
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<ISettingsRepository, SettingsRepository>();
+            services.AddTransient<ISettingsService, SettingsService>();
         }
 
         public static void ConfigureDatabase(this IServiceCollection services, string connectionString)
