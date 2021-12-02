@@ -37,15 +37,9 @@ namespace Integrator.Features.Settings
         }
 
         [HttpGet("test/{id}")]
-        public SettingDTO GetById(string id)
+        public ActionResult GetById(string id)
         {
-            var setting = _unitOfWork.Settings.GetById(id);
-
-            var settingDTO = _mapper.Map<SettingDTO>(setting);
-
-            return settingDTO;
-
-
+            throw new Exception("Something bad happened!");
         }
     }
 }

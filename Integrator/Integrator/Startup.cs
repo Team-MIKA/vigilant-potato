@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
+using Integrator.Infrastructure.ErrorHandling;
 using Integrator.Infrastructure.Extensions;
 
 namespace Integrator
@@ -21,11 +23,9 @@ namespace Integrator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-
             services.ConfigureDatabase(Configuration.GetConnectionString("MariaDbDockerORIGINAL"));
             services.ConfigureServices();
             services.ConfigureCors();
-            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -47,14 +47,10 @@ namespace Integrator
                     .AllowAnyHeader());
             }
 
-            // app.UseHttpsRedirection();
-
+            app.ConfigureExceptionHandler();
             app.UseRouting();
-
             app.UseCors("Default");
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
