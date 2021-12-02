@@ -13,6 +13,6 @@ namespace Integrator.Features.Widgets
 
         IEnumerable <WidgetDTO> ListWidgets();
 
-        WidgetDTO DeleteWidget(WidgetDTO widgetDto);
+        string DeleteWidget(string id);
     }
 }

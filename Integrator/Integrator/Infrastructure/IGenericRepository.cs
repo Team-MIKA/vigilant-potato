@@ -10,6 +10,7 @@ namespace Integrator.Infrastructure
         void Insert(T entity);  
         void Update(T entity);  
         void Delete(T entity);
+        void Delete(string id);
         IEnumerable<T> ListAll();
     }
 }

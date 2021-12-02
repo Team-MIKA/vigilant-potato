@@ -51,13 +51,13 @@ namespace Integrator.Features.Widgets
         }
 
         [HttpDelete("[action]/{id}")]
-        public IActionResult DeleteWidget([FromBody] WidgetDTO widgetDto)
+        public IActionResult DeleteWidget(string id)
         {
-            if (!ModelState.IsValid) throw new Exception("Error deleting widget: " + widgetDto.Id);
+            if (!ModelState.IsValid) throw new Exception("Error deleting widget: " + id);
             
-            var widget = _widgetService.DeleteWidget(widgetDto);
+            var widgetId = _widgetService.DeleteWidget(id);
 
-            return Ok(widget);
+            return Ok(widgetId);
 
         }
 

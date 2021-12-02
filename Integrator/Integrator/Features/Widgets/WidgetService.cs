@@ -32,17 +32,12 @@ namespace Integrator.Features.Widgets
             return widget.Id;
         }
 
-        public WidgetDTO DeleteWidget(WidgetDTO widgetDto)
+        public string DeleteWidget(string id)
         {
-            //tidligere brugte vi det her, dur det nye med mapper? 
-            //var widget = new Widget { Id = widgetDto.Id };
-
-            var widget = _mapper.Map<Widget>(widgetDto);
-
-            _unitOfWork.Widgets.Delete(widget);
+            _unitOfWork.Widgets.Delete(id);
             _unitOfWork.Complete();
 
-            return widgetDto;
+            return id;
         }
 
         public IEnumerable<WidgetDTO> ListWidgets()
