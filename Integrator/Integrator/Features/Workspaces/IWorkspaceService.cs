@@ -14,7 +14,7 @@ namespace Integrator.Features.Workspaces
 
         WorkspaceDTO GetById(string id);
 
-        WorkspaceDTO CreateWorkspace(WorkspaceDTO workspaceDto);
+        string CreateWorkspace(WorkspaceDTO workspaceDto);
 
         string DeleteWorkspace(WorkspaceDTO workspaceDto);
 
