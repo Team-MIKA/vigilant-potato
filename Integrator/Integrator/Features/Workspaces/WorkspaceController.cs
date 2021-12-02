@@ -81,11 +81,11 @@ namespace Integrator.Features.Workspaces
         }
         
         [HttpDelete("[action]/{id}")]
-        public IActionResult RemoveWidgetFromWorkspace([FromBody] string widgetId, string id)
+        public IActionResult RemoveWidgetFromWorkspace(string id)
         {
-            if (!ModelState.IsValid) throw new Exception("Error adding widget: " + widgetId + " to workspace: " + id);
+            if (!ModelState.IsValid) throw new Exception("Error removing widget" + id);
 
-            var retId = _workspaceService.RemoveWidgetFromWorkspace(widgetId, id);
+            var retId = _workspaceService.RemoveWidgetFromWorkspace(id);
 
             return Ok(retId);
         }

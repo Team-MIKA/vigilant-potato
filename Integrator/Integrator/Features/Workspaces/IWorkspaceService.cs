@@ -20,6 +20,6 @@ namespace Integrator.Features.Workspaces
 
         string AddWidgetToWorkspace(WidgetDTO widgetDto, string id);
 
-        string RemoveWidgetFromWorkspace(string widgetId, string id);
+        string RemoveWidgetFromWorkspace(string widgetId);
     }
 }

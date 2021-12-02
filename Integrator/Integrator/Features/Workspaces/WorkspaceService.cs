@@ -33,10 +33,10 @@ namespace Integrator.Features.Workspaces
         public string AddWidgetToWorkspace(WidgetDTO widgetDto, string id)
         {
             var widget = _mapper.Map<Widget>(widgetDto);
-            _unitOfWork.Workspaces.AddWidgetToWorkspace(widget, id);
+            var createdId = _unitOfWork.Workspaces.AddWidgetToWorkspace(widget, id);
             _unitOfWork.Complete();
 
-            return id;
+            return createdId;
         }
 
         public string CreateWorkspace(WorkspaceDTO workspaceDto)
@@ -59,12 +59,12 @@ namespace Integrator.Features.Workspaces
             return id;
         }
 
-        public string RemoveWidgetFromWorkspace(string widgetId, string id)
+        public string RemoveWidgetFromWorkspace(string widgetId)
         {
-            _unitOfWork.Workspaces.RemoveWidgetFromWorkspace(widgetId, id);
+            _unitOfWork.Workspaces.RemoveWidgetFromWorkspace(widgetId);
             _unitOfWork.Complete();
 
-            return id;
+            return widgetId;
         }
 
         public IEnumerable<WorkspaceDTO> ListWorkspaces()

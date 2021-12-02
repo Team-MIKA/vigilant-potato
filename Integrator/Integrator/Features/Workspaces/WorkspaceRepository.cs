@@ -18,18 +18,19 @@ namespace Integrator.Features.Workspaces
             throw new System.NotImplementedException();
         }
 
-        public void AddWidgetToWorkspace(Widget widget, string workspaceId)
+        public string AddWidgetToWorkspace(Widget widget, string workspaceId)
         {
-            _context.WorkspaceWidgets.Add(new WorkspaceWidget
+            var entityEntry = _context.WorkspaceWidgets.Add(new WorkspaceWidget
             {
                 WorkspaceId = workspaceId,
                 WidgetId = widget.Id
             });
+            return entityEntry.Entity.Id;
         }
         
-        public void RemoveWidgetFromWorkspace(string widgetId, string workspaceId)
+        public void RemoveWidgetFromWorkspace(string widgetId)
         {
-            var entity = _context.WorkspaceWidgets.First(x => x.WidgetId.Equals(widgetId) && x.WorkspaceId.Equals(workspaceId));
+            var entity = _context.WorkspaceWidgets.First(x => x.Id.Equals(widgetId));
             _context.Set<WorkspaceWidget>().Remove(entity);
 
         }
