@@ -29,7 +29,7 @@ namespace Integrator.Features.Workspaces
         
         public void RemoveWidgetFromWorkspace(string widgetId, string workspaceId)
         {
-            var entity = _context.WorkspaceWidgets.First(x => x.WidgetId.Equals(widgetId));
+            var entity = _context.WorkspaceWidgets.First(x => x.WidgetId.Equals(widgetId) && x.WorkspaceId.Equals(workspaceId));
             _context.Set<WorkspaceWidget>().Remove(entity);
 
         }

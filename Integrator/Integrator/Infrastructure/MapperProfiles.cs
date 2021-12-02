@@ -8,7 +8,7 @@ using Integrator.Features.Workspaces.Models;
 
 namespace Integrator.Infrastructure
 {
-    public class MapperProfiles : Profile
+    public class MapperProfiles :  Profile
     {
         public MapperProfiles()
         {
@@ -20,6 +20,7 @@ namespace Integrator.Infrastructure
                        
             CreateMap<WorkspaceWidget, WidgetDTO>()
                 .IncludeMembers(src => src.Widget)
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.WidgetId))
                 .ReverseMap()
                 .ForMember(dst => dst.Id, act => act.Ignore());
             
