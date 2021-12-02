@@ -46,7 +46,7 @@ namespace Integrator
                     .AllowAnyMethod()
                     .AllowAnyHeader());
             }
-
+            
             app.ConfigureExceptionHandler();
             app.UseRouting();
             app.UseCors("Default");
