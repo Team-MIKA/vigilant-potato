@@ -7,11 +7,27 @@ This is the repository for group MIKA's P7 project
 
 
 ## Commands
+1 integrator nede
+```
+docker build . -t my-web-app -f .\Integrator\Dockerfile
+```
+
+```
+dotnet ef migrations add "message"
+```
+
+```
+dotnet ef database update
+```
 
 ### HTTPS (rider and windows)
 ```
 dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\Integrator.pfx -p mikapassword
 ```
+Trust certificates:
+linux: https://stackoverflow.com/questions/55485511/how-to-run-dotnet-dev-certs-https-trust
+windows: dotnet dev-certs https --trust
+
 
 ```
 dotnet user-secrets set "Kestrel:Certificates:Development:Password" "mikapassword"
