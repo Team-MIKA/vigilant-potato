@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Runtime.CompilerServices;
-using Integrator.Features.Settings.Models;
+﻿using Integrator.Features.Settings.Models;
 using Integrator.Infrastructure;
 
 namespace Integrator.Features.Settings
