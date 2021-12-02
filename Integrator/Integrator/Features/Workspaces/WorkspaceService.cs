@@ -39,14 +39,14 @@ namespace Integrator.Features.Workspaces
             return id;
         }
 
-        public WorkspaceDTO CreateWorkspace(WorkspaceDTO workspaceDto)
+        public string CreateWorkspace(WorkspaceDTO workspaceDto)
         {
             var workspace = _mapper.Map<Workspace>(workspaceDto);
 
             _unitOfWork.Workspaces.Insert(workspace);
             _unitOfWork.Complete();
 
-            return workspaceDto;
+            return workspace.Id;
         }
 
         public string DeleteWorkspace(WorkspaceDTO workspaceDto)

@@ -55,9 +55,9 @@ namespace Integrator.Features.Workspaces
         {
             if (!ModelState.IsValid) throw new Exception("Error creating workspace");
             
-            var workspace = _workspaceService.CreateWorkspace(workspaceDto);
+            var id = _workspaceService.CreateWorkspace(workspaceDto);
 
-            return Ok(workspace.Id);
+            return Ok(id);
         }
 
         [HttpDelete("[action]")]
