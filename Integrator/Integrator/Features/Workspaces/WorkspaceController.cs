@@ -4,10 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Integrator.Features.Widgets.DTO;
-using Integrator.Features.Widgets.Models;
 using Integrator.Features.Workspaces.DTO;
-using Integrator.Features.Workspaces.Models;
 using Integrator.Infrastructure;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -31,6 +30,8 @@ namespace Integrator.Features.Workspaces
         }
 
         [HttpGet("[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<WorkspaceDTO>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult ListWorkspaces()
         {
             if (!ModelState.IsValid) throw new Exception("Error retrieving list of workspaces");
@@ -41,6 +42,8 @@ namespace Integrator.Features.Workspaces
         }
 
         [HttpGet("[action]/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WorkspaceDTO))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetById(string id)
         {
             if (!ModelState.IsValid) throw new Exception("Error getting workspace by id: " + id);
@@ -51,6 +54,8 @@ namespace Integrator.Features.Workspaces
         }
 
         [HttpPost("[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult CreateWorkspace([FromBody] WorkspaceDTO workspaceDto)
         {
             if (!ModelState.IsValid) throw new Exception("Error creating workspace");
@@ -61,6 +66,8 @@ namespace Integrator.Features.Workspaces
         }
 
         [HttpDelete("[action]/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteWorkspace(string id)
         {
             if (!ModelState.IsValid) throw new Exception("Error deleting workspace: " + id);
@@ -71,6 +78,8 @@ namespace Integrator.Features.Workspaces
         }
 
         [HttpPost("[action]/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult AddWidgetToWorkspace([FromBody] WidgetDTO widgetDto, string id)
         {
             if (!ModelState.IsValid) throw new Exception("Error adding widget: " + widgetDto.Id + " to workspace: " + id);
@@ -81,6 +90,8 @@ namespace Integrator.Features.Workspaces
         }
         
         [HttpDelete("[action]/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult RemoveWidgetFromWorkspace(string id)
         {
             if (!ModelState.IsValid) throw new Exception("Error removing widget" + id);

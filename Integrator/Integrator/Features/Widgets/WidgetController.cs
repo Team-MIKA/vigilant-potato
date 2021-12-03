@@ -9,6 +9,8 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Integrator.Features.Settings.DTO;
+using Microsoft.AspNetCore.Http;
 
 namespace Integrator.Features.Widgets
 {
@@ -31,6 +33,8 @@ namespace Integrator.Features.Widgets
         }
 
         [HttpPost("[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult CreateWidget([FromBody] WidgetDTO widgetDto)
         {
             if (!ModelState.IsValid) throw new Exception("Error creating widget");
@@ -42,6 +46,8 @@ namespace Integrator.Features.Widgets
         }
 
         [HttpGet("[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<WidgetDTO>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult ListWidgets()
         {
             if (!ModelState.IsValid) throw new Exception("Error retrieving a list of widgets");
@@ -51,6 +57,8 @@ namespace Integrator.Features.Widgets
         }
 
         [HttpDelete("[action]/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteWidget(string id)
         {
             if (!ModelState.IsValid) throw new Exception("Error deleting widget: " + id);
