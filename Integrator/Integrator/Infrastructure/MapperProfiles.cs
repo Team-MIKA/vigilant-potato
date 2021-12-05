@@ -11,7 +11,7 @@ namespace Integrator.Infrastructure
         public MapperProfiles()
         {
             CreateMap<Setting, SettingDTO>();
-            CreateMap<RegistrationCategory, CategoryDto>().ReverseMap();
+            CreateMap<RegistrationCategory, CategoryDTO>().ReverseMap();
         }
     }
 }

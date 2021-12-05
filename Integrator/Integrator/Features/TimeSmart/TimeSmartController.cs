@@ -26,19 +26,21 @@ namespace Integrator.Features.TimeSmart
         }
         
         [HttpGet]
-        public IEnumerable<CategoryDto> Get()
+        public ActionResult<IEnumerable<CategoryDTO>> Get()
         {
             var categories = _unitOfWork.Categories.ListAll();
-            var categoryDtos = _mapper.Map<IEnumerable<CategoryDto>>(categories);
+            var categoryDTOs = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
 
-            return categoryDtos;
+            return Ok(categoryDTOs);
         }
 
         [HttpPost]
-        public void Insert([FromBody] CategoryDto newCategory)
+        public void Insert([FromBody] CategoryDTO newCategory)
         {
             var category = _mapper.Map<RegistrationCategory>(newCategory);
             category.Id = Guid.NewGuid().ToString();
+            category.Created = new DateTime();
+            category.Modified = new DateTime();
             _unitOfWork.Categories.Insert(category);
             _unitOfWork.Complete();
         }
