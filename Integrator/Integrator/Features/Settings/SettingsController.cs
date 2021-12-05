@@ -1,10 +1,6 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
 using Integrator.Features.Settings.DTO;
-using Integrator.Features.Settings.Models;
-using Integrator.Infrastructure;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -15,37 +11,40 @@ namespace Integrator.Features.Settings
     public class SettingsController : ControllerBase
     {
         private readonly ILogger<SettingsController> _logger;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+        private readonly ISettingsService _settingsService;
 
-        public SettingsController(ILogger<SettingsController> logger, IUnitOfWork unitOfWork, IMapper mapper)
+        public SettingsController(ILogger<SettingsController> logger, ISettingsService settingsService)
         {
             _logger = logger;
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            _settingsService = settingsService;
         }
         
         [HttpGet]
-        public IEnumerable<SettingDTO> Get()
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<SettingDTO>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<IEnumerable<SettingDTO>> Get()
         {
-            return _unitOfWork.Settings.ListAll()
-                .Select(setting => new SettingDTO
-                {
-                    Id = setting.Id, 
-                    Name = setting.Name
-                });
+            _logger.Log(LogLevel.Information, "Get all settings");
+            return Ok(_settingsService.GetSettings());
         }
 
         [HttpGet("test/{id}")]
-        public SettingDTO GetById(string id)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SettingDTO))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<SettingDTO> GetById(string id)
         {
-            var setting = _unitOfWork.Settings.GetById(id);
-
-            var settingDTO = _mapper.Map<SettingDTO>(setting);
-
-            return settingDTO;
-
-
+            _logger.Log(LogLevel.Information, "Get setting by id");
+            return Ok(_settingsService.GetById(id));
+        }
+        
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<bool> Insert([FromBody] SettingDTO setting)
+        {
+            _logger.Log(LogLevel.Information, "Create new setting");
+            _settingsService.CreateSetting(setting);
+            return Ok(true);
         }
     }
 }

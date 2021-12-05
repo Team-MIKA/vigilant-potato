@@ -25,6 +25,7 @@ namespace Integrator.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
         }
 
+
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

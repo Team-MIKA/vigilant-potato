@@ -32,7 +32,13 @@ namespace Integrator.Infrastructure
         {
             _context.Set<T>().Remove(entity);
         }
-        
+
+        public void Delete(string id)
+        {
+            var entity = _context.Set<T>().Find(id);
+            Delete(entity);
+        }
+
         public IEnumerable<T> ListAll()
         {
             return _context.Set<T>().ToList();

@@ -3,14 +3,16 @@ using System;
 using Integrator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Integrator.Migrations
 {
     [DbContext(typeof(IntegratorContext))]
-    partial class IntegratorContextModelSnapshot : ModelSnapshot
+    [Migration("20211129082441_Workspaces")]
+    partial class Workspaces
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,68 +38,7 @@ namespace Integrator.Migrations
                     b.ToTable("Settings");
                 });
 
-            modelBuilder.Entity("Integrator.Features.TimeSmart.Models.Registration", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("OrderId")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("RegistrationCategoryId")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RegistrationCategoryId");
-
-                    b.ToTable("Registrations");
-                });
-
-            modelBuilder.Entity("Integrator.Features.TimeSmart.Models.RegistrationCategory", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RegistrationCategories");
-                });
-
-            modelBuilder.Entity("Integrator.Features.TimeSmart.Models.Registration", b =>
-                {
-                    b.HasOne("Integrator.Features.TimeSmart.Models.RegistrationCategory", "RegistrationCategory")
-                        .WithMany()
-                        .HasForeignKey("RegistrationCategoryId");
-
-                    b.Navigation("RegistrationCategory");
-                });
-
-            modelBuilder.Entity("Integrator.Features.Widgets.Models.Widget", b =>
+            modelBuilder.Entity("Integrator.Features.Workspaces.Models.Widget", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,29 +57,6 @@ namespace Integrator.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Widgets");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "a0cd214b-2067-47fc-9eaa-d3ac4b4f0353",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Timesmart Registration"
-                        },
-                        new
-                        {
-                            Id = "78iu214b-2067-47fc-9eaa-d3ac4b4f0352",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Timesmart List"
-                        },
-                        new
-                        {
-                            Id = "hy67214b-2067-47fc-9eaa-d3ac4b4f0351",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "SAP List"
-                        });
                 });
 
             modelBuilder.Entity("Integrator.Features.Workspaces.Models.Workspace", b =>
@@ -176,11 +94,9 @@ namespace Integrator.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("WidgetId")
-                        .HasMaxLength(128)
                         .HasColumnType("varchar(128)");
 
                     b.Property<string>("WorkspaceId")
-                        .HasMaxLength(128)
                         .HasColumnType("varchar(128)");
 
                     b.HasKey("Id");
@@ -194,14 +110,13 @@ namespace Integrator.Migrations
 
             modelBuilder.Entity("Integrator.Features.Workspaces.Models.WorkspaceWidget", b =>
                 {
-                    b.HasOne("Integrator.Features.Widgets.Models.Widget", "Widget")
+                    b.HasOne("Integrator.Features.Workspaces.Models.Widget", "Widget")
                         .WithMany()
                         .HasForeignKey("WidgetId");
 
                     b.HasOne("Integrator.Features.Workspaces.Models.Workspace", "Workspace")
                         .WithMany("Widgets")
-                        .HasForeignKey("WorkspaceId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("WorkspaceId");
 
                     b.Navigation("Widget");
 

@@ -3,14 +3,16 @@ using System;
 using Integrator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Integrator.Migrations
 {
     [DbContext(typeof(IntegratorContext))]
-    partial class IntegratorContextModelSnapshot : ModelSnapshot
+    [Migration("20211202104828_addedCascadingDeleteOnWorkspaces")]
+    partial class addedCascadingDeleteOnWorkspaces
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,67 +38,6 @@ namespace Integrator.Migrations
                     b.ToTable("Settings");
                 });
 
-            modelBuilder.Entity("Integrator.Features.TimeSmart.Models.Registration", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("OrderId")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("RegistrationCategoryId")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RegistrationCategoryId");
-
-                    b.ToTable("Registrations");
-                });
-
-            modelBuilder.Entity("Integrator.Features.TimeSmart.Models.RegistrationCategory", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RegistrationCategories");
-                });
-
-            modelBuilder.Entity("Integrator.Features.TimeSmart.Models.Registration", b =>
-                {
-                    b.HasOne("Integrator.Features.TimeSmart.Models.RegistrationCategory", "RegistrationCategory")
-                        .WithMany()
-                        .HasForeignKey("RegistrationCategoryId");
-
-                    b.Navigation("RegistrationCategory");
-                });
-
             modelBuilder.Entity("Integrator.Features.Widgets.Models.Widget", b =>
                 {
                     b.Property<string>("Id")
@@ -116,29 +57,6 @@ namespace Integrator.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Widgets");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "a0cd214b-2067-47fc-9eaa-d3ac4b4f0353",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Timesmart Registration"
-                        },
-                        new
-                        {
-                            Id = "78iu214b-2067-47fc-9eaa-d3ac4b4f0352",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Timesmart List"
-                        },
-                        new
-                        {
-                            Id = "hy67214b-2067-47fc-9eaa-d3ac4b4f0351",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "SAP List"
-                        });
                 });
 
             modelBuilder.Entity("Integrator.Features.Workspaces.Models.Workspace", b =>
