@@ -45,16 +45,11 @@ namespace Integrator.Features.TimeSmart
             _unitOfWork.Complete();
         }
         
-        [HttpGet("[action]")]
-        public ActionResult<IEnumerable<RegistrationDTO>> GetRegistrations()
+        [HttpGet("[action]/{orderId}")]
+        public ActionResult<IEnumerable<RegistrationDTO>> GetRegistrations(string orderId)
         {
-            // TODO: Make filtering on OrderId
-            var registrations = _unitOfWork.Registrations.ListAll();
-            var registrationDTOs = _mapper.Map<IEnumerable<RegistrationDTO>>(registrations);
-            foreach (var registrationDtO in registrationDTOs)
-            {
-                Console.WriteLine(registrationDtO.Category.Text);
-            }
+            var registrationsForOrderId = _unitOfWork.Registrations.ListAllByOrderId(orderId);
+            var registrationDTOs = _mapper.Map<IEnumerable<RegistrationDTO>>(registrationsForOrderId);
             return Ok(registrationDTOs);
         }
         

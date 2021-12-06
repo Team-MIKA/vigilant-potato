@@ -13,11 +13,22 @@ namespace Integrator.Features.TimeSmart.Repositories
         {
         }
 
-        public new IEnumerable<Registration> ListAll()
+        public IEnumerable<Registration> ListAllByOrderId(string orderId)
         {
-            return _context.Registrations
+            if (orderId == "null")
+            {
+                return _context.Registrations
+                    .Include(reg => reg.RegistrationCategory)
+                    .ToList();
+            }
+            
+            var registrationsForOrderId = _context.Registrations
                 .Include(reg => reg.RegistrationCategory)
+                .Where(reg => reg.OrderId.Equals(orderId))
                 .ToList();
+            
+
+            return registrationsForOrderId;
         }
     }
 }
