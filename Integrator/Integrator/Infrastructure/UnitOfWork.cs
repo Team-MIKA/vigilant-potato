@@ -1,5 +1,6 @@
 ﻿using Integrator.Features.Settings;
 using Integrator.Features.TimeSmart;
+using Integrator.Features.TimeSmart.Repositories;
 using Integrator.Features.Widgets;
 using Integrator.Features.Workspaces;
 
@@ -16,6 +17,7 @@ namespace Integrator.Infrastructure
             Workspaces = new WorkspaceRepository(_context);
             Widgets = new WidgetRepository(_context);
             Categories = new CategoryRepository(_context);
+            Registrations = new RegistrationRepository(_context);
         }
 
         public void Dispose()
@@ -23,7 +25,7 @@ namespace Integrator.Infrastructure
             _context.Dispose();
         }
 
-        public ISettingsRepository Settings { get; private set; }
+        public IRegistrationRepository Registrations { get; }
         public IWorkspaceRepository Workspaces { get; private set; }
 
         public IWidgetRepository Widgets { get; private set; }

@@ -1,5 +1,7 @@
 ﻿using Integrator.Features.Settings.Models;
 using Integrator.Features.TimeSmart.Models;
+using Integrator.Features.Widgets.Models;
+using Integrator.Features.Workspaces.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Integrator
@@ -18,7 +20,7 @@ namespace Integrator
         public virtual DbSet<Widget> Widgets { get; set; }
         public virtual DbSet<WorkspaceWidget> WorkspaceWidgets { get; set; }
 
-        Widget[] InitialWidgets =
+        readonly Widget[] _initialWidgets =
         {
             new Widget
             {
@@ -37,6 +39,30 @@ namespace Integrator
             }
         };
         
+        readonly RegistrationCategory[] _initialCategories =
+        {
+            new RegistrationCategory
+            {
+                Id = "a6cd214b-2067-47fc-9eaa-d3ac4b4f0353",
+                Text = "Quality"
+            },
+            new RegistrationCategory
+            {
+                Id = "a6iu214b-2067-47fc-9eaa-d3ac4b4f0352",
+                Text = "Error"
+            },
+            new RegistrationCategory
+            {
+                Id = "a667214b-2067-47fc-9eaa-d3ac4b4f0351",
+                Text = "Break"
+            },
+            new RegistrationCategory
+            {
+                Id = "abb7214b-2067-47fc-9ebb-d3ac4b4f0351",
+                Text = "Meeting"
+            }
+        };
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -49,7 +75,7 @@ namespace Integrator
 
             modelBuilder.Entity<Widget>(entity =>
             {
-                entity.HasData(InitialWidgets);
+                entity.HasData(_initialWidgets);
                 entity.Property(e=>e.Id).HasMaxLength(128);
                 entity.Property(e=>e.Id).ValueGeneratedOnAdd();
             });
@@ -63,6 +89,11 @@ namespace Integrator
                 entity.HasOne(e => e.Workspace)
                     .WithMany(e => e.Widgets)
                     .OnDelete(DeleteBehavior.Cascade);
+            });
+            
+            modelBuilder.Entity<RegistrationCategory>(entity =>
+            {
+                entity.HasData(_initialCategories);
             });
         }
 

@@ -3,6 +3,10 @@ using Integrator.Features.Settings.DTO;
 using Integrator.Features.Settings.Models;
 using Integrator.Features.TimeSmart.DTO;
 using Integrator.Features.TimeSmart.Models;
+using Integrator.Features.Widgets.DTO;
+using Integrator.Features.Widgets.Models;
+using Integrator.Features.Workspaces.DTO;
+using Integrator.Features.Workspaces.Models;
 
 namespace Integrator.Infrastructure
 {
@@ -10,8 +14,11 @@ namespace Integrator.Infrastructure
     {
         public MapperProfiles()
         {
-            CreateMap<Setting, SettingDTO>();
             CreateMap<RegistrationCategory, CategoryDTO>().ReverseMap();
+            CreateMap<Registration, RegistrationDTO>()
+                .ForMember(dst => dst.Category, opt => opt
+                    .MapFrom(src => src.RegistrationCategory))
+                .ReverseMap();
             CreateMap<Setting, SettingDTO>().ReverseMap();      
             CreateMap<Workspace, WorkspaceDTO>()
                 .ForMember(dst => dst.Widgets, opt => opt

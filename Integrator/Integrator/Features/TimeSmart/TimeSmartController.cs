@@ -25,8 +25,8 @@ namespace Integrator.Features.TimeSmart
             _mapper = mapper;
         }
         
-        [HttpGet]
-        public ActionResult<IEnumerable<CategoryDTO>> Get()
+        [HttpGet("[action]")]
+        public ActionResult<IEnumerable<CategoryDTO>> GetCategories()
         {
             var categories = _unitOfWork.Categories.ListAll();
             var categoryDTOs = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
@@ -34,14 +34,41 @@ namespace Integrator.Features.TimeSmart
             return Ok(categoryDTOs);
         }
 
-        [HttpPost]
-        public void Insert([FromBody] CategoryDTO newCategory)
+        [HttpPost("[action]")]
+        public void InsertCategory([FromBody] CategoryDTO newCategory)
         {
             var category = _mapper.Map<RegistrationCategory>(newCategory);
             category.Id = Guid.NewGuid().ToString();
             category.Created = new DateTime();
             category.Modified = new DateTime();
             _unitOfWork.Categories.Insert(category);
+            _unitOfWork.Complete();
+        }
+        
+        [HttpGet("[action]")]
+        public ActionResult<IEnumerable<RegistrationDTO>> GetRegistrations()
+        {
+            // TODO: Make filtering on OrderId
+            var registrations = _unitOfWork.Registrations.ListAll();
+            var registrationDTOs = _mapper.Map<IEnumerable<RegistrationDTO>>(registrations);
+            foreach (var registrationDtO in registrationDTOs)
+            {
+                Console.WriteLine(registrationDtO.Category.Text);
+            }
+            return Ok(registrationDTOs);
+        }
+        
+        [HttpPost("[action]")]
+        public void InsertRegistration([FromBody] CreateRegistrationDTO newRegistration)
+        {
+            var registration = new Registration
+            {
+                OrderId = newRegistration.OrderId,
+                EndTime = newRegistration.EndTime,
+                StartTime = newRegistration.StartTime,
+                RegistrationCategoryId = newRegistration.CategoryId
+            };
+            _unitOfWork.Registrations.Insert(registration);
             _unitOfWork.Complete();
         }
     }
