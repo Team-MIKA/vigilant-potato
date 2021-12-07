@@ -12,6 +12,11 @@ namespace Integrator
             
         }
 
+        public IntegratorContext()
+        {
+            
+        }
+
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<Workspace> Workspaces { get; set; }
         public virtual DbSet<Widget> Widgets { get; set; }
