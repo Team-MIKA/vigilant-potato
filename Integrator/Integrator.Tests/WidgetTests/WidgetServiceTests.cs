@@ -1,15 +1,12 @@
-using System;
 using System.Linq;
 using AutoMapper;
-using Integrator.Features.Settings.Models;
 using Integrator.Features.Widgets;
 using Integrator.Features.Widgets.DTO;
-using Integrator.Features.Widgets.Models;
 using Integrator.Infrastructure;
 using Integrator.Tests.TestHelpers;
 using NUnit.Framework;
 
-namespace Integrator.Tests
+namespace Integrator.Tests.WidgetTests
 {
     public class WidgetTests
     {

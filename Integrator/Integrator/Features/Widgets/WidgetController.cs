@@ -18,17 +18,11 @@ namespace Integrator.Features.Widgets
     [Route("[controller]")]
     public class WidgetController : ControllerBase
     {
-        private readonly ILogger<WidgetController> logger;
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IMapper mapper;
         private readonly IWidgetService widgetService;
 
 
-        public WidgetController(ILogger<WidgetController> logger, IUnitOfWork unitOfWork, IMapper mapper, IWidgetService widgetService)
+        public WidgetController(IWidgetService widgetService)
         {
-            this.logger = logger;
-            this.unitOfWork = unitOfWork;
-            this.mapper = mapper;
             this.widgetService = widgetService;
         }
 
