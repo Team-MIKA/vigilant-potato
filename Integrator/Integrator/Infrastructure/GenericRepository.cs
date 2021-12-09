@@ -1,47 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Integrator.Infrastructure
 {
     public class GenericRepository<T> : IGenericRepository<T> where T: BaseEntity  
     {
         protected readonly IntegratorContext _context;
+        private DbSet<T> _dbSet;
 
         public GenericRepository(IntegratorContext context)
         {
             _context = context;
+            _dbSet = _context.Set<T>();
         }
         
         public T GetById(string id)
         {
-            return _context.Set<T>().Find(id);
+            return _dbSet.Find(id);
         }
 
         public void Insert(T entity)
         {
-            _context.Set<T>().Add(entity);
+            _dbSet.Add(entity);
         }
 
         public void Update(T entity)
         {
-            _context.Set<T>().Update(entity);
+            _dbSet.Update(entity);
         }
 
         public void Delete(T entity)
         {
-            _context.Set<T>().Remove(entity);
+            _dbSet.Remove(entity);
         }
 
         public void Delete(string id)
         {
-            var entity = _context.Set<T>().Find(id);
+            var entity = _dbSet.Find(id);
             Delete(entity);
         }
 
         public IEnumerable<T> ListAll()
         {
-            return _context.Set<T>().ToList();
+            return _dbSet.ToList();
         }
     }  
 }
