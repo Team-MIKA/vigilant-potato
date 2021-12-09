@@ -1,10 +1,8 @@
 name: .NET
 
 on:
-  push:
-    branches: [ dotnet-mariadb ]
   pull_request:
-    branches: [ dotnet-mariadb ]
+    branches: [ main ]
 
 jobs:
   build:
