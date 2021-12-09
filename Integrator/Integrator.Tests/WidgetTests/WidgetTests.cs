@@ -17,11 +17,11 @@ namespace Integrator.Tests
         private IWidgetService _widgetService;
         private IntegratorContext _context;
         
-        // NOTE TO DEV: 
+        // NOTE TO DEV: Widgets have seed data within fluent API
         [SetUp]
         public void Setup()
         {
-            _context = DbContextHelper.MakeTestDbContext();
+            _context = TestHelper.MakeTestDbContext();
             
             _unitOfWork = new UnitOfWork(_context);
             

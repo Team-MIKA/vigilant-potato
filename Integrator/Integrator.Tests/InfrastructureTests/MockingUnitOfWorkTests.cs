@@ -49,7 +49,7 @@ namespace Integrator.Tests.Infrastructure
             var setting = new Setting() { Id = "test" };
             var seedData = new List<Setting>() { setting };
 
-            var dbSetMock = DbContextHelper.MakeMockDbSet(seedData);
+            var dbSetMock = TestHelper.MakeMockDbSet(seedData);
 
             var context = new Mock<IntegratorContext>();
             context.Setup(x => x.Set<Setting>()).Returns(dbSetMock.Object);
