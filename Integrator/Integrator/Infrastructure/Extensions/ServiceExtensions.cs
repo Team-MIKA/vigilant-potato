@@ -33,11 +33,7 @@ namespace Integrator.Infrastructure.Extensions
                 options.AddPolicy(name: "Default",
                     builder =>
                     {
-                        builder.WithOrigins(
-                                "http://localhost:3000/",
-                                "https://localhost:3000/",
-                                "http://localhost:3000",
-                                "https://localhost:3000")
+                        builder.AllowAnyOrigin()
                             .AllowAnyHeader()
                             .AllowAnyMethod();
                     });
