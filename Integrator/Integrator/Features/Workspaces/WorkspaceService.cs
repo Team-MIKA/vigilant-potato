@@ -69,7 +69,7 @@ namespace Integrator.Features.Workspaces
 
         public IEnumerable<WorkspaceDTO> ListWorkspaces()
         {
-            var res = _unitOfWork.Workspaces.ListAll()
+            var res = _unitOfWork.Workspaces.GetAll()
             .Select(workspace => new WorkspaceDTO
             {
                 Id = workspace.Id,

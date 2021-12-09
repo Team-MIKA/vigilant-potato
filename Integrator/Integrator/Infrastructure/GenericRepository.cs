@@ -42,7 +42,7 @@ namespace Integrator.Infrastructure
             Delete(entity);
         }
 
-        public IEnumerable<T> ListAll()
+        public IEnumerable<T> GetAll()
         {
             return _dbSet.ToList();
         }

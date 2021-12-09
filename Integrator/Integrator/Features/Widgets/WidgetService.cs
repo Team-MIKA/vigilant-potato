@@ -42,7 +42,7 @@ namespace Integrator.Features.Widgets
 
         public IEnumerable<WidgetDTO> ListWidgets()
         {
-            var res = _unitOfWork.Widgets.ListAll()
+            var res = _unitOfWork.Widgets.GetAll()
             .Select(widget => new WidgetDTO
             {
                 Id = widget.Id,

@@ -57,7 +57,7 @@ namespace Integrator.Tests.Settings
 
             // Act
             var repository = new GenericRepository<Setting>(context.Object);
-            var result = repository.ListAll();
+            var result = repository.GetAll();
 
             // Assert
             Assert.AreEqual(testList, result.ToList());

@@ -56,7 +56,7 @@ namespace Integrator.Tests.Infrastructure
 
             // Act
             _unitOfWork = new UnitOfWork(context.Object);
-            var result = _unitOfWork.Settings.ListAll();
+            var result = _unitOfWork.Settings.GetAll();
 
             // Assert
             Assert.AreEqual(seedData, result.ToList());

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
@@ -17,6 +19,28 @@ namespace Integrator.Tests.TestHelpers
             mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(() => dataQueryable.GetEnumerator());
 
             return mockSet;
+        }
+
+        public static IntegratorContext MakeTestDbContext()
+        {
+
+
+            var options = new DbContextOptionsBuilder<IntegratorContext>()
+                .UseSqlite(CreateInMemoryDatabase())
+                .Options;
+            var context = new IntegratorContext(options);
+            context.Database.EnsureCreated();
+
+            return context;
+        }
+        
+        private static DbConnection CreateInMemoryDatabase()
+        {
+            var connection = new SqliteConnection("Filename=:memory:");
+
+            connection.Open();
+
+            return connection;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Integrator.Features.Settings
 
         public IEnumerable<SettingDTO> GetSettings()
         {
-            return _mapper.Map<IEnumerable<SettingDTO>>(_unitOfWork.Settings.ListAll());
+            return _mapper.Map<IEnumerable<SettingDTO>>(_unitOfWork.Settings.GetAll());
         }
 
         public SettingDTO GetById(string id)
