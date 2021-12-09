@@ -12,25 +12,25 @@ namespace Integrator.Infrastructure
     {
         public MapperProfiles()
         {
-            CreateMap<Setting, SettingDTO>().ReverseMap();      
-            CreateMap<Workspace, WorkspaceDTO>()
+            CreateMap<Setting, SettingDto>().ReverseMap();      
+            CreateMap<Workspace, WorkspaceDto>()
                 .ForMember(dst => dst.Widgets, opt => opt
                     .MapFrom(src => src.Widgets))
                 .ReverseMap();
                        
-            CreateMap<WorkspaceWidget, WidgetDTO>()
+            CreateMap<WorkspaceWidget, WidgetDto>()
                 .IncludeMembers(src => src.Widget)
                 .ReverseMap()
                 .ForMember(dst => dst.Id, act => act.Ignore());
             
-            CreateMap<WorkspaceWidget, WorkspaceDTO>()
+            CreateMap<WorkspaceWidget, WorkspaceDto>()
                 .IncludeMembers(src => src.Workspace)
                 .ReverseMap()
                 .ForMember(dst => dst.Id, act => act.Ignore());           
             
             // CreateMap<WidgetDTO, WorkspaceWidget>().ForSourceMember()
             //.ForMember(dest => dest.WidgetId, opt => opt.MapFrom(src => src.Id)).ForMember(dest => dest.WorkspaceId, opt => opt.MapFrom(src => src.Id));
-            CreateMap<Widget, WidgetDTO>().ReverseMap();
+            CreateMap<Widget, WidgetDto>().ReverseMap();
         }
     }
 }
