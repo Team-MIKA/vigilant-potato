@@ -11,40 +11,40 @@ namespace Integrator.Tests.Settings
 {
     public class SettingsTestInMemory
     {
-        private IntegratorContext _context;
+        private IntegratorContext context;
         
         [SetUp]
         public void Setup()
         {
-            _context = DbContextHelper.MakeTestDbContext();
+            context = DbContextHelper.MakeTestDbContext();
             
-            _context.Set<Setting>().Add(new Setting { Id = "1", Name = "FPS_MAX", Created = DateTime.UtcNow, Modified = DateTime.UtcNow});
-            _context.Set<Setting>().Add(new Setting { Id = "2", Name = "Graphics", Created = DateTime.UtcNow, Modified = DateTime.UtcNow});
-            _context.Set<Setting>().Add(new Setting { Id = "3", Name = "Chat", Created = DateTime.UtcNow, Modified = DateTime.UtcNow});
+            context.Set<Setting>().Add(new Setting { Id = "1", Name = "FPS_MAX", Created = DateTime.UtcNow, Modified = DateTime.UtcNow});
+            context.Set<Setting>().Add(new Setting { Id = "2", Name = "Graphics", Created = DateTime.UtcNow, Modified = DateTime.UtcNow});
+            context.Set<Setting>().Add(new Setting { Id = "3", Name = "Chat", Created = DateTime.UtcNow, Modified = DateTime.UtcNow});
             
-            _context.SaveChanges();
+            context.SaveChanges();
         }
 
         [TearDown]
         public void TearDown()
         {
-            _context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
         }
 
         [Test]
         public void Remove_SettingsObjectPassed_ProperMethodCalled_InMemoryDatabase()
         {
-            var test = _context.Settings.ToList();
-            _context.Set<Setting>().Remove(_context.Set<Setting>().Find("2"));
-            _context.SaveChanges();
-            var settings = _context.Set<Setting>();
+            var test = context.Settings.ToList();
+            context.Set<Setting>().Remove(context.Set<Setting>().Find("2"));
+            context.SaveChanges();
+            var settings = context.Set<Setting>();
             Assert.AreEqual(2, settings.Count());
         }
         
         [Test]
         public void Get_SettingsObjectPassed_ProperMethodCalled_InMemoryDatabase()
         {
-            var sut = new GenericRepository<Setting>(_context);
+            var sut = new GenericRepository<Setting>(context);
             //Act
             var settings = sut.GetAll();
 
@@ -57,7 +57,7 @@ namespace Integrator.Tests.Settings
         {
             // Arrange
             const string result = "Graphics";
-            var settingsRepository = new SettingsRepository(_context);
+            var settingsRepository = new SettingsRepository(context);
             
             //Act
             var setting = settingsRepository.GetById("2");

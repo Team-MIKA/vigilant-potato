@@ -16,39 +16,39 @@ namespace Integrator.Features.Workspaces
     [Route("[controller]")]
     public class WorkspaceController : ControllerBase
     {
-        private readonly ILogger<WorkspaceController> _logger;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-        private readonly IWorkspaceService _workspaceService;
+        private readonly ILogger<WorkspaceController> logger;
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IMapper mapper;
+        private readonly IWorkspaceService workspaceService;
 
         public WorkspaceController(ILogger<WorkspaceController> logger, IUnitOfWork unitOfWork, IMapper mapper, IWorkspaceService workspaceService)
         {
-            _logger = logger;
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-            _workspaceService = workspaceService;
+            this.logger = logger;
+            this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
+            this.workspaceService = workspaceService;
         }
 
         [HttpGet("[action]")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<WorkspaceDTO>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<WorkspaceDto>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult ListWorkspaces()
         {
             if (!ModelState.IsValid) throw new Exception("Error retrieving list of workspaces");
 
-            var res = _workspaceService.ListWorkspaces();
+            var res = workspaceService.ListWorkspaces();
 
             return Ok(res);
         }
 
         [HttpGet("[action]/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WorkspaceDTO))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WorkspaceDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetById(string id)
         {
             if (!ModelState.IsValid) throw new Exception("Error getting workspace by id: " + id);
 
-            var workspaceDto = _workspaceService.GetById(id);
+            var workspaceDto = workspaceService.GetById(id);
 
             return Ok(workspaceDto);
         }
@@ -56,11 +56,11 @@ namespace Integrator.Features.Workspaces
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult CreateWorkspace([FromBody] WorkspaceDTO workspaceDto)
+        public IActionResult CreateWorkspace([FromBody] WorkspaceDto workspaceDto)
         {
             if (!ModelState.IsValid) throw new Exception("Error creating workspace");
             
-            var id = _workspaceService.CreateWorkspace(workspaceDto);
+            var id = workspaceService.CreateWorkspace(workspaceDto);
 
             return Ok(id);
         }
@@ -72,7 +72,7 @@ namespace Integrator.Features.Workspaces
         {
             if (!ModelState.IsValid) throw new Exception("Error deleting workspace: " + id);
 
-            var deletedId = _workspaceService.DeleteWorkspace(id);
+            var deletedId = workspaceService.DeleteWorkspace(id);
 
             return Ok(deletedId);
         }
@@ -80,11 +80,11 @@ namespace Integrator.Features.Workspaces
         [HttpPost("[action]/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult AddWidgetToWorkspace([FromBody] WidgetDTO widgetDto, string id)
+        public IActionResult AddWidgetToWorkspace([FromBody] WidgetDto widgetDto, string id)
         {
             if (!ModelState.IsValid) throw new Exception("Error adding widget: " + widgetDto.Id + " to workspace: " + id);
 
-            var widgetId = _workspaceService.AddWidgetToWorkspace(widgetDto, id);
+            var widgetId = workspaceService.AddWidgetToWorkspace(widgetDto, id);
 
             return Ok(widgetId);
         }
@@ -96,7 +96,7 @@ namespace Integrator.Features.Workspaces
         {
             if (!ModelState.IsValid) throw new Exception("Error removing widget" + id);
 
-            var retId = _workspaceService.RemoveWidgetFromWorkspace(id);
+            var retId = workspaceService.RemoveWidgetFromWorkspace(id);
 
             return Ok(retId);
         }

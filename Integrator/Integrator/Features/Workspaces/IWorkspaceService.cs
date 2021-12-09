@@ -10,15 +10,15 @@ namespace Integrator.Features.Workspaces
 {
     public interface IWorkspaceService
     {
-        IEnumerable <WorkspaceDTO> ListWorkspaces();
+        IEnumerable <WorkspaceDto> ListWorkspaces();
 
-        WorkspaceDTO GetById(string id);
+        WorkspaceDto GetById(string id);
 
-        string CreateWorkspace(WorkspaceDTO workspaceDto);
+        string CreateWorkspace(WorkspaceDto workspaceDto);
 
         string DeleteWorkspace(string id);
 
-        string AddWidgetToWorkspace(WidgetDTO widgetDto, string id);
+        string AddWidgetToWorkspace(WidgetDto widgetDto, string id);
 
         string RemoveWidgetFromWorkspace(string widgetId);
     }

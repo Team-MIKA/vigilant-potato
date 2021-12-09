@@ -5,8 +5,8 @@ namespace Integrator.Features.Settings
 {
     public interface ISettingsService
     {
-        void CreateSetting(SettingDTO setting);
-        IEnumerable<SettingDTO> GetSettings();
-        SettingDTO GetById(string id);
+        void CreateSetting(SettingDto setting);
+        IEnumerable<SettingDto> GetSettings();
+        SettingDto GetById(string id);
     }
 }

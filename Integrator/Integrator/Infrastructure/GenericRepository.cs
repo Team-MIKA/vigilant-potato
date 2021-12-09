@@ -7,44 +7,44 @@ namespace Integrator.Infrastructure
 {
     public class GenericRepository<T> : IGenericRepository<T> where T: BaseEntity  
     {
-        protected readonly IntegratorContext _context;
-        private DbSet<T> _dbSet;
+        protected readonly IntegratorContext Context;
+        private DbSet<T> dbSet;
 
         public GenericRepository(IntegratorContext context)
         {
-            _context = context;
-            _dbSet = _context.Set<T>();
+            Context = context;
+            dbSet = Context.Set<T>();
         }
         
         public T GetById(string id)
         {
-            return _dbSet.Find(id);
+            return dbSet.Find(id);
         }
 
         public void Insert(T entity)
         {
-            _dbSet.Add(entity);
+            dbSet.Add(entity);
         }
 
         public void Update(T entity)
         {
-            _dbSet.Update(entity);
+            dbSet.Update(entity);
         }
 
         public void Delete(T entity)
         {
-            _dbSet.Remove(entity);
+            dbSet.Remove(entity);
         }
 
         public void Delete(string id)
         {
-            var entity = _dbSet.Find(id);
+            var entity = dbSet.Find(id);
             Delete(entity);
         }
 
         public IEnumerable<T> GetAll()
         {
-            return _dbSet.ToList();
+            return dbSet.ToList();
         }
     }  
 }

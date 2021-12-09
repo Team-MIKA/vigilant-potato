@@ -22,7 +22,7 @@ namespace Integrator
         public virtual DbSet<Widget> Widgets { get; set; }
         public virtual DbSet<WorkspaceWidget> WorkspaceWidgets { get; set; }
 
-        Widget[] InitialWidgets =
+        Widget[] initialWidgets =
         {
             new Widget
             {
@@ -53,7 +53,7 @@ namespace Integrator
 
             modelBuilder.Entity<Widget>(entity =>
             {
-                entity.HasData(InitialWidgets);
+                entity.HasData(initialWidgets);
                 entity.Property(e=>e.Id).HasMaxLength(128);
                 entity.Property(e=>e.Id).ValueGeneratedOnAdd();
             });

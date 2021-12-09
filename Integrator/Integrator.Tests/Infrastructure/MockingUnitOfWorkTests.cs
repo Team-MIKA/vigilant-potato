@@ -12,8 +12,8 @@ namespace Integrator.Tests.Infrastructure
 {
     public class InfrastructureTests
     {
-        private Mock<IntegratorContext> _mockContext;
-        private IUnitOfWork _unitOfWork;
+        private Mock<IntegratorContext> mockContext;
+        private IUnitOfWork unitOfWork;
 
         [SetUp]
         public void Setup()
@@ -27,18 +27,18 @@ namespace Integrator.Tests.Infrastructure
             // Arrange
             var setting = new Setting();
 
-            _mockContext = new Mock<IntegratorContext>();
+            mockContext = new Mock<IntegratorContext>();
             var dbSetMock = new Mock<DbSet<Setting>>();
-            _mockContext.Setup(x => x.Set<Setting>()).Returns(dbSetMock.Object);
+            mockContext.Setup(x => x.Set<Setting>()).Returns(dbSetMock.Object);
             dbSetMock.Setup(x => x.Add(It.IsAny<Setting>()));
 
             // Act
             
-            _unitOfWork = new UnitOfWork(_mockContext.Object);
-            _unitOfWork.Settings.Insert(setting);
+            unitOfWork = new UnitOfWork(mockContext.Object);
+            unitOfWork.Settings.Insert(setting);
 
             //Assert
-            _mockContext.Verify(x => x.Set<Setting>());
+            mockContext.Verify(x => x.Set<Setting>());
             dbSetMock.Verify(x => x.Add(It.Is<Setting>(y => y == setting)));
         }
         
@@ -55,8 +55,8 @@ namespace Integrator.Tests.Infrastructure
             context.Setup(x => x.Set<Setting>()).Returns(dbSetMock.Object);
 
             // Act
-            _unitOfWork = new UnitOfWork(context.Object);
-            var result = _unitOfWork.Settings.GetAll();
+            unitOfWork = new UnitOfWork(context.Object);
+            var result = unitOfWork.Settings.GetAll();
 
             // Assert
             Assert.AreEqual(seedData, result.ToList());
@@ -73,8 +73,8 @@ namespace Integrator.Tests.Infrastructure
             dbSetMock.Setup(x => x.Remove(It.IsAny<Setting>()));
 
             // Act
-            _unitOfWork = new UnitOfWork(context.Object);
-            _unitOfWork.Settings.Delete(setting);
+            unitOfWork = new UnitOfWork(context.Object);
+            unitOfWork.Settings.Delete(setting);
 
             //Assert
             context.Verify(x => x.Set<Setting>());
@@ -93,8 +93,8 @@ namespace Integrator.Tests.Infrastructure
             dbSetMock.Setup(x => x.Add(It.IsAny<Setting>())).Returns(() => null);
             
             // Act
-            _unitOfWork = new UnitOfWork(context.Object);
-            _unitOfWork.Settings.Insert(setting);
+            unitOfWork = new UnitOfWork(context.Object);
+            unitOfWork.Settings.Insert(setting);
             
             //Assert
             context.Verify(x => x.Set<Setting>());
@@ -117,8 +117,8 @@ namespace Integrator.Tests.Infrastructure
             dbSetMock.Setup(x => x.Find(It.IsAny<string>())).Returns(setting);
 
             // Act
-            _unitOfWork = new UnitOfWork(context.Object);
-            _unitOfWork.Settings.GetById("test");
+            unitOfWork = new UnitOfWork(context.Object);
+            unitOfWork.Settings.GetById("test");
 
             // Assert
             context.Verify(x => x.Set<Setting>());
