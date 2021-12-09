@@ -3,7 +3,7 @@ name: continuous deployment
 on:
   push:
     branches:
-      - "main"
+      - "dotnet-mariadb"
 
 jobs:
   docker:
