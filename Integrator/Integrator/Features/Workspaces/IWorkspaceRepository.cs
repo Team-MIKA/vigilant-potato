@@ -8,9 +8,9 @@ namespace Integrator.Features.Workspaces
     {
         void Test();
 
-        void AddWidgetToWorkspace(Widget widget, string workspaceId);
+        string AddWidgetToWorkspace(Widget widget, string workspaceId);
         
-        void RemoveWidgetFromWorkspace(string widgetId, string workspaceId);
+        void RemoveWidgetFromWorkspace(string widgetId);
 
         Workspace GetWorkspaceById(string id);
 

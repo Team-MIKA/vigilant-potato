@@ -9,6 +9,8 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Integrator.Features.Settings.DTO;
+using Microsoft.AspNetCore.Http;
 
 namespace Integrator.Features.Widgets
 {
@@ -19,52 +21,51 @@ namespace Integrator.Features.Widgets
         private readonly ILogger<WidgetController> _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IWidgetService _widgetService;
 
-        public WidgetController(ILogger<WidgetController> logger, IUnitOfWork unitOfWork, IMapper mapper)
+
+        public WidgetController(ILogger<WidgetController> logger, IUnitOfWork unitOfWork, IMapper mapper, IWidgetService widgetService)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _widgetService = widgetService;
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> CreateWidget([FromBody] WidgetDTO widgetDto)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult CreateWidget([FromBody] WidgetDTO widgetDto)
         {
             if (!ModelState.IsValid) throw new Exception("Error creating widget");
-            var widget = _mapper.Map<Widget>(widgetDto);
 
-            _unitOfWork.Widgets.Insert(widget);
+            var widgetId = _widgetService.CreateWidget(widgetDto);
 
-            _unitOfWork.Complete();
-
-            return Ok(widget.Id);
+            return Ok(widgetId);
 
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> ListWidgets()
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<WidgetDTO>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult ListWidgets()
         {
             if (!ModelState.IsValid) throw new Exception("Error retrieving a list of widgets");
-            var res = _unitOfWork.Widgets.ListAll()
-                .Select(widget => new WidgetDTO
-                {
-                    Id = widget.Id,
-                    Title = widget.Title,
-                });
+            var res = _widgetService.ListWidgets();
 
             return Ok(res);
-
         }
 
         [HttpDelete("[action]/{id}")]
-        public async Task<IActionResult> DeleteWidget(string id)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult DeleteWidget(string id)
         {
             if (!ModelState.IsValid) throw new Exception("Error deleting widget: " + id);
-            var widget = new Widget { Id = id };
-            _unitOfWork.Widgets.Delete(widget);
-            _unitOfWork.Complete();
+            
+            var widgetId = _widgetService.DeleteWidget(id);
 
-            return Ok(id);
+            return Ok(widgetId);
 
         }
 

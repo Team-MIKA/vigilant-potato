@@ -8,7 +8,7 @@ using Integrator.Features.Workspaces.Models;
 
 namespace Integrator.Infrastructure
 {
-    public class MapperProfiles : Profile
+    public class MapperProfiles :  Profile
     {
         public MapperProfiles()
         {

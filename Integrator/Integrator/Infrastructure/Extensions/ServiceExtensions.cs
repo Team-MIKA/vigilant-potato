@@ -1,5 +1,7 @@
 ﻿using System;
 using Integrator.Features.Settings;
+using Integrator.Features.Widgets;
+using Integrator.Features.Workspaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -13,7 +15,11 @@ namespace Integrator.Infrastructure.Extensions
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<ISettingsRepository, SettingsRepository>();
+            services.AddTransient<IWorkspaceRepository, WorkspaceRepository>();
+            services.AddTransient<IWidgetRepository, WidgetRepository>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IWorkspaceService, WorkspaceService>();
+            services.AddTransient<IWidgetService, WidgetService>();
         }
 
         public static void ConfigureDatabase(this IServiceCollection services, string connectionString)
