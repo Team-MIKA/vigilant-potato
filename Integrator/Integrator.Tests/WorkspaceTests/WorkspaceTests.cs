@@ -37,7 +37,7 @@ namespace Integrator.Tests.WorkspaceTests
         {
             Assert.AreEqual(0, context.Workspaces.ToList().Count);
             
-            var newWorkspace = new WorkspaceDTO
+            var newWorkspace = new WorkspaceDto
             {
                 Title = "NewWorkspace"
             };
@@ -106,7 +106,7 @@ namespace Integrator.Tests.WorkspaceTests
                 Id = "workspaceTestId"
             };
             
-            var newWidget = new WidgetDTO()
+            var newWidget = new WidgetDto
             {
                 Title = "NewWidget"
             };
