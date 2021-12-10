@@ -38,6 +38,17 @@ namespace Integrator.Tests.InfrastructureTests
         }
 
         [Test]
+        public void TestController_ThrowsError()
+        {
+            var testController = new TestController();
+
+            Assert.Throws<Exception>(() =>
+            {
+                testController.ThrowsError();
+            });
+        }
+
+        [Test]
         public async Task ExceptionHandler_OnError_ShouldSendInternalServerError()
         {
             var host = await new HostBuilder()
@@ -49,6 +60,7 @@ namespace Integrator.Tests.InfrastructureTests
                         {
                             services.ConfigureServices();
                             services.ConfigureCors();
+                            services.ConfigureDatabase("Test");
                             services.AddControllers();
                         })
                         .Configure(app =>
