@@ -18,7 +18,7 @@ namespace Integrator.Tests.WidgetTests
         [SetUp]
         public void Setup()
         {
-            context = DbContextHelper.MakeTestDbContext();
+            context = TestHelper.MakeTestDbContext();
             
             unitOfWork = new UnitOfWork(context);
             

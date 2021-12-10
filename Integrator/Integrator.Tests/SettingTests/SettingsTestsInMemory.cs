@@ -16,7 +16,7 @@ namespace Integrator.Tests.Settings
         [SetUp]
         public void Setup()
         {
-            context = DbContextHelper.MakeTestDbContext();
+            context = TestHelper.MakeTestDbContext();
             
             context.Set<Setting>().Add(new Setting { Id = "1", Name = "FPS_MAX", Created = DateTime.UtcNow, Modified = DateTime.UtcNow});
             context.Set<Setting>().Add(new Setting { Id = "2", Name = "Graphics", Created = DateTime.UtcNow, Modified = DateTime.UtcNow});

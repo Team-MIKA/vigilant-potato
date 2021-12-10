@@ -13,11 +13,6 @@ namespace Integrator.Features.Workspaces
         {
         }
 
-        public void Test()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public string AddWidgetToWorkspace(Widget widget, string workspaceId)
         {
             var entityEntry = Context.WorkspaceWidgets.Add(new WorkspaceWidget
@@ -28,9 +23,9 @@ namespace Integrator.Features.Workspaces
             return entityEntry.Entity.Id;
         }
         
-        public void RemoveWidgetFromWorkspace(string widgetId)
+        public void RemoveWidgetFromWorkspace(string workspaceWidgetId)
         {
-            var entity = Context.WorkspaceWidgets.First(x => x.Id.Equals(widgetId));
+            var entity = Context.WorkspaceWidgets.First(x => x.Id.Equals(workspaceWidgetId));
             Context.Set<WorkspaceWidget>().Remove(entity);
 
         }

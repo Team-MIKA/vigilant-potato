@@ -18,7 +18,7 @@ namespace Integrator.Tests.Infrastructure
         [SetUp]
         public void Setup()
         {
-            context = DbContextHelper.MakeTestDbContext();
+            context = TestHelper.MakeTestDbContext();
             
             context.Set<Setting>().Add(new Setting { Id = "1", Name = "test1", Created = DateTime.UtcNow, Modified = DateTime.UtcNow});
             context.Set<Setting>().Add(new Setting { Id = "2", Name = "test2", Created = DateTime.UtcNow, Modified = DateTime.UtcNow});
@@ -32,7 +32,7 @@ namespace Integrator.Tests.Infrastructure
         [TearDown]
         public void TearDown()
         {
-            using var context = DbContextHelper.MakeTestDbContext();
+            using var context = TestHelper.MakeTestDbContext();
             context.Database.EnsureDeleted();
         }
         
