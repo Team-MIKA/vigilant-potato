@@ -1,15 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Integrator.Features.Widgets;
 using Integrator.Features.Widgets.DTO;
 using Integrator.Infrastructure;
 using Integrator.Tests.TestHelpers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Moq;
 using NUnit.Framework;
 
 namespace Integrator.Tests.WidgetTests
@@ -80,14 +77,46 @@ namespace Integrator.Tests.WidgetTests
         }
         
         [Test]
-        public void WidgetController_404OnInvalidModel()
+        public void WidgetController_List404OnInvalidModel()
+        {
+            controller.ModelState.AddModelError("modelIsInvalid", "modelIsInvalid");
+            
+            var exception = Assert.Throws<Exception>(() =>
+            {
+                var widgets = controller.ListWidgets();
+            });
+            
+            Assert.AreEqual("Error retrieving a list of widgets", exception.Message);
+        }
+        
+        [Test]
+        public void WidgetController_Create404OnInvalidModel()
         {
             var widgetToAdd = new WidgetDto();
 
-            Assert.Throws<Exception>(() =>
+            controller.ModelState.AddModelError("modelIsInvalid", "modelIsInvalid");
+            
+            var exception = Assert.Throws<Exception>(() =>
             {
-                var response = controller.CreateWidget(widgetToAdd);
+                controller.CreateWidget(widgetToAdd);
             });
+            
+            Assert.AreEqual("Error creating a widget", exception.Message);
+        }
+        
+        [Test]
+        public void WidgetController_Delete404OnInvalidModel()
+        {
+            var widgetId = "1";
+
+            controller.ModelState.AddModelError("modelIsInvalid", "modelIsInvalid");
+            
+            var exception = Assert.Throws<Exception>(() =>
+            {
+                controller.DeleteWidget(widgetId);
+            });
+            
+            Assert.AreEqual("Error deleting widget: " + widgetId, exception.Message);
         }
     }
 }

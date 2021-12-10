@@ -31,7 +31,7 @@ namespace Integrator.Features.Widgets
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult CreateWidget([FromBody] WidgetDto widgetDto)
         {
-            if (!ModelState.IsValid) throw new Exception("Error creating widget");
+            if (!ModelState.IsValid) throw new Exception("Error creating a widget");
 
             var widgetId = widgetService.CreateWidget(widgetDto);
 
