@@ -34,7 +34,7 @@ namespace Integrator.Tests.TestHelpers
             return context;
         }
         
-        private static DbConnection CreateInMemoryDatabase()
+        public static DbConnection CreateInMemoryDatabase()
         {
             var connection = new SqliteConnection("Filename=:memory:");
             connection.Open();

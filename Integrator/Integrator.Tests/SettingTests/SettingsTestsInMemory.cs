@@ -4,10 +4,9 @@ using Integrator.Features.Settings;
 using Integrator.Features.Settings.Models;
 using Integrator.Infrastructure;
 using Integrator.Tests.TestHelpers;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
-namespace Integrator.Tests.Settings
+namespace Integrator.Tests.SettingTests
 {
     public class SettingsTestInMemory
     {

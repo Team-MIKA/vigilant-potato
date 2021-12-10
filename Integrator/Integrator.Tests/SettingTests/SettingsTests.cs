@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Integrator.Features.Settings;
 using Integrator.Features.Settings.Models;
 using Integrator.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Moq;
 using NUnit.Framework;
 
-namespace Integrator.Tests.Settings
+namespace Integrator.Tests.SettingTests
 {
     public class SettingsTests
     {

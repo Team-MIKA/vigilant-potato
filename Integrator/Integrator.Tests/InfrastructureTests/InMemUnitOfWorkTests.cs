@@ -8,7 +8,7 @@ using Integrator.Infrastructure;
 using Integrator.Tests.TestHelpers;
 using NUnit.Framework;
 
-namespace Integrator.Tests.Infrastructure
+namespace Integrator.Tests.InfrastructureTests
 {
     public class InMemUnitOfWorkTests
     {

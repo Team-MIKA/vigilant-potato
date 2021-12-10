@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Integrator.Features.Settings.Models;
@@ -8,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using NUnit.Framework;
 
-namespace Integrator.Tests.Infrastructure
+namespace Integrator.Tests.InfrastructureTests
 {
     public class InfrastructureTests
     {

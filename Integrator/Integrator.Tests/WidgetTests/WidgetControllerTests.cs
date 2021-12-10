@@ -77,6 +77,22 @@ namespace Integrator.Tests.WidgetTests
         }
         
         [Test]
+        public void WidgetController_CanDeleteWidgets()
+        {
+            var widgetIdFromSeedData = "a0cd214b-2067-47fc-9eaa-d3ac4b4f0353";
+            var response = controller.DeleteWidget(widgetIdFromSeedData);
+            
+            var okResult = response as OkObjectResult;
+            
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual(200, okResult.StatusCode);
+            var deletedWidgetId = okResult.Value as string;
+            Assert.NotNull(deletedWidgetId);
+            Assert.AreEqual(widgetIdFromSeedData, deletedWidgetId);
+            Assert.AreEqual(2, widgetService.ListWidgets().ToList().Count);
+        }
+        
+        [Test]
         public void WidgetController_List404OnInvalidModel()
         {
             controller.ModelState.AddModelError("modelIsInvalid", "modelIsInvalid");
