@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using Integrator.Features.Settings;
 using Integrator.Features.Widgets;
 using Integrator.Features.Workspaces;
@@ -44,6 +45,12 @@ namespace Integrator.Infrastructure.Extensions
                             .AllowAnyMethod();
                     });
             });
+        }
+
+        public static void AddEnumNamesToSwagger(this IServiceCollection services)
+        {
+            services.AddControllersWithViews().AddJsonOptions(options =>
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
         }
     }
 }

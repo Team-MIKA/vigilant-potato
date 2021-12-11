@@ -7,6 +7,7 @@ using Integrator.Features.Workspaces.DTO;
 using Integrator.Features.Workspaces.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Integrator.Features.Widgets
@@ -47,9 +48,29 @@ namespace Integrator.Features.Widgets
             {
                 Id = widget.Id,
                 Title = widget.Title,
+                Type = widget.Type
             });
 
             return res;
         }
+        private readonly HttpClient client = new HttpClient();
+        public async Task<Tuple<string, string, string>> CreateData(string widgetId, Dictionary<string, string> json, string publisherId)
+        {
+            var jsonAsUrl = new FormUrlEncodedContent(json);
+
+            var widget = _mapper.Map<Widget>(ListWidgets().First(w => w.Id == widgetId));
+            
+            var response = await client.PostAsync(widget.Url, jsonAsUrl);
+
+            string guidFromTimesmart = await response.Content.ReadAsStringAsync();
+            return new Tuple<string, string, string>(guidFromTimesmart, publisherId, widgetId);
+        }
+
+        // public async void getTracability(string orderId)
+        // {
+        //     // Widget[] creators = [new Widget()] // GetMappingsFromOrder(orderID);
+        //     //var data = creators.Select(c => c.getAllData(orderId));
+        //     // return new Tracability(data);
+        // }
     }
 }

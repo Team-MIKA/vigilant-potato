@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Text.Json.Serialization;
 using Integrator.Infrastructure.ErrorHandling;
 using Integrator.Infrastructure.Extensions;
 
@@ -23,7 +24,7 @@ namespace Integrator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-            services.ConfigureDatabase(Configuration.GetConnectionString("MariaDbDockerORIGINAL"));
+            services.ConfigureDatabase(Configuration.GetConnectionString("MariaDbDocker"));
             services.ConfigureServices();
             services.ConfigureCors();
             services.AddControllers();
@@ -31,6 +32,7 @@ namespace Integrator
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Integrator", Version = "v1" });
             });
+            services.AddEnumNamesToSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
