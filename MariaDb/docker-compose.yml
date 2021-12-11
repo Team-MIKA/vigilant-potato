@@ -1,23 +1,25 @@
 version: '3.1'
 services:
   mariadb:
+    container_name: mariadb_container
     image: mariadb
     restart: always
     volumes:
       - ./data:/var/lib/mysql
     ports:
       - 3306:3306
-    # networks:
-    #   - random
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+    networks:
+      - db-network
   adminer:
+    container_name: mariadb_adminer
     image: adminer
     restart: always
-    # networks:
-    #   - random
     ports:
       - 8080:8080
-# networks:
-#   random:
-#     external: true
+    networks:
+      - db-network
+networks:
+  db-network:
+    external: true

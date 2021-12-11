@@ -1,5 +1,6 @@
 ﻿using System;
 using Integrator.Features.Settings;
+using Integrator.Features.TimeSmart.Repositories;
 using Integrator.Features.Widgets;
 using Integrator.Features.Workspaces;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,10 @@ namespace Integrator.Infrastructure.Extensions
             services.AddTransient<ISettingsRepository, SettingsRepository>();
             services.AddTransient<IWorkspaceRepository, WorkspaceRepository>();
             services.AddTransient<IWidgetRepository, WidgetRepository>();
+            
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IRegistrationRepository, RegistrationRepository>();
+            
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IWorkspaceService, WorkspaceService>();
             services.AddTransient<IWidgetService, WidgetService>();

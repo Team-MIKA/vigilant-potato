@@ -1,5 +1,4 @@
 using System.Linq;
-using Integrator.Features.Widgets.DTO;
 using Integrator.Features.Widgets.Models;
 using Integrator.Features.Workspaces.Models;
 using Integrator.Infrastructure;
