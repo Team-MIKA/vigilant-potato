@@ -39,5 +39,4 @@ jobs:
         run: echo ${{ steps.docker_build.outputs.digest }}
       
       - name: Deliver to production
-        run: curl -X POST https://portainer.aaen.cloud/api/webhooks/290f2dea-3d65-49b5-b094-5dd660e7fa31
-
+        run: curl -X POST ${{ secrets.UPDATE_SERVICE_HOOK }}
