@@ -9,11 +9,5 @@ namespace Integrator.Features.Widgets
         public WidgetRepository(IntegratorContext context) : base(context)
         {
         }
-
-        public void Test()
-        {
-            throw new System.NotImplementedException();
-        }
-
     }
 }

@@ -12,12 +12,17 @@ namespace Integrator
             
         }
 
+        public IntegratorContext()
+        {
+            
+        }
+
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<Workspace> Workspaces { get; set; }
         public virtual DbSet<Widget> Widgets { get; set; }
         public virtual DbSet<WorkspaceWidget> WorkspaceWidgets { get; set; }
 
-        Widget[] InitialWidgets =
+        Widget[] initialWidgets =
         {
             new Widget
             {
@@ -48,7 +53,7 @@ namespace Integrator
 
             modelBuilder.Entity<Widget>(entity =>
             {
-                entity.HasData(InitialWidgets);
+                entity.HasData(initialWidgets);
                 entity.Property(e=>e.Id).HasMaxLength(128);
                 entity.Property(e=>e.Id).ValueGeneratedOnAdd();
             });

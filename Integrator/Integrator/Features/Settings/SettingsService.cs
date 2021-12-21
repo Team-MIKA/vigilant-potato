@@ -8,28 +8,28 @@ namespace Integrator.Features.Settings
 {
     public class SettingsService : ISettingsService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IMapper mapper;
 
         public SettingsService(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
         }
-        public void CreateSetting(SettingDTO setting)
+        public void CreateSetting(SettingDto setting)
         {
-            _unitOfWork.Settings.Insert(_mapper.Map<Setting>(setting));
-            _unitOfWork.Complete();
-        }
-
-        public IEnumerable<SettingDTO> GetSettings()
-        {
-            return _mapper.Map<IEnumerable<SettingDTO>>(_unitOfWork.Settings.ListAll());
+            unitOfWork.Settings.Insert(mapper.Map<Setting>(setting));
+            unitOfWork.Complete();
         }
 
-        public SettingDTO GetById(string id)
+        public IEnumerable<SettingDto> GetSettings()
         {
-            return _mapper.Map<SettingDTO>(_unitOfWork.Settings.GetById(id));
+            return mapper.Map<IEnumerable<SettingDto>>(unitOfWork.Settings.GetAll());
+        }
+
+        public SettingDto GetById(string id)
+        {
+            return mapper.Map<SettingDto>(unitOfWork.Settings.GetById(id));
         }
     }
 }

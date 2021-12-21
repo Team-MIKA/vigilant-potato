@@ -11,6 +11,6 @@ namespace Integrator.Infrastructure
         void Update(T entity);  
         void Delete(T entity);
         void Delete(string id);
-        IEnumerable<T> ListAll();
+        IEnumerable<T> GetAll();
     }
 }

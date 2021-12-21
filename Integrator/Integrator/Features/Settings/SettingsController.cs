@@ -10,40 +10,40 @@ namespace Integrator.Features.Settings
     [Route("[controller]")]
     public class SettingsController : ControllerBase
     {
-        private readonly ILogger<SettingsController> _logger;
-        private readonly ISettingsService _settingsService;
+        private readonly ILogger<SettingsController> logger;
+        private readonly ISettingsService settingsService;
 
         public SettingsController(ILogger<SettingsController> logger, ISettingsService settingsService)
         {
-            _logger = logger;
-            _settingsService = settingsService;
+            this.logger = logger;
+            this.settingsService = settingsService;
         }
         
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<SettingDTO>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<SettingDto>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<IEnumerable<SettingDTO>> Get()
+        public ActionResult<IEnumerable<SettingDto>> Get()
         {
-            _logger.Log(LogLevel.Information, "Get all settings");
-            return Ok(_settingsService.GetSettings());
+            logger.Log(LogLevel.Information, "Get all settings");
+            return Ok(settingsService.GetSettings());
         }
 
         [HttpGet("test/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SettingDTO))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SettingDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<SettingDTO> GetById(string id)
+        public ActionResult<SettingDto> GetById(string id)
         {
-            _logger.Log(LogLevel.Information, "Get setting by id");
-            return Ok(_settingsService.GetById(id));
+            logger.Log(LogLevel.Information, "Get setting by id");
+            return Ok(settingsService.GetById(id));
         }
         
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<bool> Insert([FromBody] SettingDTO setting)
+        public ActionResult<bool> Insert([FromBody] SettingDto setting)
         {
-            _logger.Log(LogLevel.Information, "Create new setting");
-            _settingsService.CreateSetting(setting);
+            logger.Log(LogLevel.Information, "Create new setting");
+            settingsService.CreateSetting(setting);
             return Ok(true);
         }
     }

@@ -6,19 +6,19 @@ namespace Integrator.Infrastructure
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly IntegratorContext _context;
+        private readonly IntegratorContext context;
 
         public UnitOfWork(IntegratorContext context)
         {
-            _context = context;
-            Settings = new SettingsRepository(_context);
-            Workspaces = new WorkspaceRepository(_context);
-            Widgets = new WidgetRepository(_context);
+            this.context = context;
+            Settings = new SettingsRepository(this.context);
+            Workspaces = new WorkspaceRepository(this.context);
+            Widgets = new WidgetRepository(this.context);
         }
 
         public void Dispose()
         {
-            _context.Dispose();
+            context.Dispose();
         }
 
         public ISettingsRepository Settings { get; private set; }
@@ -28,7 +28,7 @@ namespace Integrator.Infrastructure
 
         public int Complete()
         {
-            return _context.SaveChanges();
+            return context.SaveChanges();
         }
     }
 }

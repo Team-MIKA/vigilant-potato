@@ -13,37 +13,37 @@ namespace Integrator.Features.Widgets
 {
     public class WidgetService : IWidgetService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IMapper mapper;
 
         public WidgetService(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
         }
 
-        public string CreateWidget(WidgetDTO widgetDto)
+        public string CreateWidget(WidgetDto widgetDto)
         {
-            var widget = _mapper.Map<Widget>(widgetDto);
+            var widget = mapper.Map<Widget>(widgetDto);
 
-            _unitOfWork.Widgets.Insert(widget);
-            _unitOfWork.Complete();
+            unitOfWork.Widgets.Insert(widget);
+            unitOfWork.Complete();
 
             return widget.Id;
         }
 
         public string DeleteWidget(string id)
         {
-            _unitOfWork.Widgets.Delete(id);
-            _unitOfWork.Complete();
+            unitOfWork.Widgets.Delete(id);
+            unitOfWork.Complete();
 
             return id;
         }
 
-        public IEnumerable<WidgetDTO> ListWidgets()
+        public IEnumerable<WidgetDto> ListWidgets()
         {
-            var res = _unitOfWork.Widgets.ListAll()
-            .Select(widget => new WidgetDTO
+            var res = unitOfWork.Widgets.GetAll()
+            .Select(widget => new WidgetDto
             {
                 Id = widget.Id,
                 Title = widget.Title,

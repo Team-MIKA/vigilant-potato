@@ -6,13 +6,10 @@ namespace Integrator.Features.Workspaces
 {
     public interface IWorkspaceRepository : IGenericRepository<Workspace>
     {
-        void Test();
-
         string AddWidgetToWorkspace(Widget widget, string workspaceId);
         
-        void RemoveWidgetFromWorkspace(string widgetId);
+        void RemoveWidgetFromWorkspace(string workspaceWidgetId);
 
         Workspace GetWorkspaceById(string id);
-
     }
 }
