@@ -36,6 +36,33 @@ namespace Integrator.Migrations
                     b.ToTable("Settings");
                 });
 
+            modelBuilder.Entity("Integrator.Features.Widgets.Models.Option", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("WidgetId")
+                        .HasColumnType("varchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WidgetId");
+
+                    b.ToTable("Option");
+                });
+
             modelBuilder.Entity("Integrator.Features.Widgets.Models.Widget", b =>
                 {
                     b.Property<string>("Id")
@@ -52,6 +79,12 @@ namespace Integrator.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("longtext");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
                     b.ToTable("Widgets");
@@ -62,21 +95,27 @@ namespace Integrator.Migrations
                             Id = "a0cd214b-2067-47fc-9eaa-d3ac4b4f0353",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Timesmart Registration"
+                            Title = "Timesmart",
+                            Type = 1,
+                            Url = "http://api.timesmart.tech:5000/TimeSmart/InsertRegistration"
                         },
                         new
                         {
                             Id = "78iu214b-2067-47fc-9eaa-d3ac4b4f0352",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Timesmart List"
+                            Title = "Timesmart Registrations",
+                            Type = 2,
+                            Url = "http://api.timesmart.tech:5000/TimeSmart/GetCategories"
                         },
                         new
                         {
                             Id = "hy67214b-2067-47fc-9eaa-d3ac4b4f0351",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "SAP List"
+                            Title = "SAP List",
+                            Type = 0,
+                            Url = "http://app.timesmart.tech/api/sap"
                         });
                 });
 
@@ -131,6 +170,13 @@ namespace Integrator.Migrations
                     b.ToTable("WorkspaceWidgets");
                 });
 
+            modelBuilder.Entity("Integrator.Features.Widgets.Models.Option", b =>
+                {
+                    b.HasOne("Integrator.Features.Widgets.Models.Widget", null)
+                        .WithMany("Options")
+                        .HasForeignKey("WidgetId");
+                });
+
             modelBuilder.Entity("Integrator.Features.Workspaces.Models.WorkspaceWidget", b =>
                 {
                     b.HasOne("Integrator.Features.Widgets.Models.Widget", "Widget")
@@ -145,6 +191,11 @@ namespace Integrator.Migrations
                     b.Navigation("Widget");
 
                     b.Navigation("Workspace");
+                });
+
+            modelBuilder.Entity("Integrator.Features.Widgets.Models.Widget", b =>
+                {
+                    b.Navigation("Options");
                 });
 
             modelBuilder.Entity("Integrator.Features.Workspaces.Models.Workspace", b =>

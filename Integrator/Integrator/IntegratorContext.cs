@@ -1,4 +1,5 @@
-﻿using Integrator.Features.Settings.Models;
+﻿using System.Collections.Generic;
+using Integrator.Features.Settings.Models;
 using Integrator.Features.Widgets.Models;
 using Integrator.Features.Workspaces.Models;
 using Microsoft.EntityFrameworkCore;
@@ -22,17 +23,30 @@ namespace Integrator
             new Widget
             {
                 Id = "a0cd214b-2067-47fc-9eaa-d3ac4b4f0353",
-                Title = "Timesmart Registration"
+                Title = "Timesmart",
+                Type = Integration.TimeSmart,
+                Url = "http://api.timesmart.tech:5000/TimeSmart/InsertRegistration",
+                Options = new []{new Option{Key = "username", Value = "admin"}, new Option{Key = "password", Value = "VeryGoodPassword"}}
+                
             },
             new Widget
             {
                 Id = "78iu214b-2067-47fc-9eaa-d3ac4b4f0352",
-                Title = "Timesmart List"
+                Title = "Timesmart Registrations",
+                Type = Integration.TimeSmartRegistrations,
+                Url = "http://api.timesmart.tech:5000/TimeSmart/GetCategories",
+                Options = new []{new Option{Key = "username", Value = "admin"}, new Option{Key = "password", Value = "VeryGoodPassword"}}
+
+
             },
             new Widget
             {
                 Id = "hy67214b-2067-47fc-9eaa-d3ac4b4f0351",
-                Title = "SAP List"
+                Title = "SAP List",
+                Type = Integration.Sap,
+                Url = "http://app.timesmart.tech/api/sap",
+                Options = new []{new Option{Key = "api-key", Value = "a4db08b7-5729-4ba9-8c08-f2df493465a"}}
+
             }
         };
         

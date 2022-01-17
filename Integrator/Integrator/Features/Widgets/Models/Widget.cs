@@ -13,8 +13,8 @@ namespace Integrator.Features.Widgets.Models
     {
         public string Title { get; set; }
         public Integration Type { get; set; }
-        public string Url { get; set; } = "api.timesmart.tech:5000/TimeSmart/InsertRegistration";
-
+        public string Url { get; set; }
+        public IEnumerable<Option> Options { get; set; }
     }
     
    public enum Integration
