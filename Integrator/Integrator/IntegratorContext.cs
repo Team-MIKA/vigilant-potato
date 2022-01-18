@@ -1,7 +1,9 @@
-﻿using Integrator.Features.Settings.Models;
+﻿using System.Collections.Generic;
+using Integrator.Features.Settings.Models;
 using Integrator.Features.Widgets.Models;
 using Integrator.Features.Workspaces.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace Integrator
 {
@@ -27,18 +29,40 @@ namespace Integrator
             new Widget
             {
                 Id = "a0cd214b-2067-47fc-9eaa-d3ac4b4f0353",
-                Title = "Timesmart Registration"
+                Title = "Timesmart",
+                Type = Integration.TimeSmart,
+                Url = "https://api.aaen.cloud/TimeSmart/InsertRegistration"
             },
             new Widget
             {
                 Id = "78iu214b-2067-47fc-9eaa-d3ac4b4f0352",
-                Title = "Timesmart List"
+                Title = "Timesmart Registrations",
+                Type = Integration.TimeSmartRegistrations,
+                Url = "https://api.aaen.cloud/TimeSmart/GetCategories",
+
+
             },
             new Widget
             {
                 Id = "hy67214b-2067-47fc-9eaa-d3ac4b4f0351",
-                Title = "SAP List"
+                Title = "SAP List",
+                Type = Integration.Sap,
+                Url = "https://app.aaen.cloud/api/sap"
+
             }
+        };
+
+        public Option[] InitialOptions =
+        {
+            new Option{Id="1", Key = "username", Value = "admin", WidgetId = "a0cd214b-2067-47fc-9eaa-d3ac4b4f0353"},
+            new Option{Id="2", Key = "password", Value = "VeryGoodPassword", WidgetId = "a0cd214b-2067-47fc-9eaa-d3ac4b4f0353"},
+            
+            
+            new Option{Id ="3", Key = "username", Value = "admin", WidgetId = "78iu214b-2067-47fc-9eaa-d3ac4b4f0352"},
+            new Option{Id ="4", Key = "password", Value = "VeryGoodPassword",WidgetId = "78iu214b-2067-47fc-9eaa-d3ac4b4f0352"},
+            
+            new Option{Id ="5", Key = "api-key", Value = "a4db08b7-5729-4ba9-8c08-f2df493465a", WidgetId = "hy67214b-2067-47fc-9eaa-d3ac4b4f0351"}
+            
         };
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -56,6 +80,13 @@ namespace Integrator
                 entity.HasData(initialWidgets);
                 entity.Property(e=>e.Id).HasMaxLength(128);
                 entity.Property(e=>e.Id).ValueGeneratedOnAdd();
+            });
+            
+            modelBuilder.Entity<Option>(o =>
+            {
+                o.HasData(InitialOptions);
+                o.Property(e=>e.Id).HasMaxLength(128);
+                o.Property(e=>e.Id).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<WorkspaceWidget>(entity => 

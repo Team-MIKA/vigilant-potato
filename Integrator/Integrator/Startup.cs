@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
 using Integrator.Infrastructure;
 using Integrator.Infrastructure.ErrorHandling;
 using Integrator.Infrastructure.Extensions;
@@ -32,6 +31,7 @@ namespace Integrator
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Integrator", Version = "v1" });
             });
+            services.AddEnumNamesToSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
