@@ -3,14 +3,16 @@ using System;
 using Integrator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Integrator.Migrations
 {
     [DbContext(typeof(IntegratorContext))]
-    partial class IntegratorContextModelSnapshot : ModelSnapshot
+    [Migration("20220118192235_leeets goo examn")]
+    partial class leeetsgooexamn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,9 +41,7 @@ namespace Integrator.Migrations
             modelBuilder.Entity("Integrator.Features.Widgets.Models.Option", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime(6)");
@@ -63,53 +63,6 @@ namespace Integrator.Migrations
                     b.HasIndex("WidgetId");
 
                     b.ToTable("Option");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Key = "username",
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Value = "admin",
-                            WidgetId = "a0cd214b-2067-47fc-9eaa-d3ac4b4f0353"
-                        },
-                        new
-                        {
-                            Id = "2",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Key = "password",
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Value = "VeryGoodPassword",
-                            WidgetId = "a0cd214b-2067-47fc-9eaa-d3ac4b4f0353"
-                        },
-                        new
-                        {
-                            Id = "3",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Key = "username",
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Value = "admin",
-                            WidgetId = "78iu214b-2067-47fc-9eaa-d3ac4b4f0352"
-                        },
-                        new
-                        {
-                            Id = "4",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Key = "password",
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Value = "VeryGoodPassword",
-                            WidgetId = "78iu214b-2067-47fc-9eaa-d3ac4b4f0352"
-                        },
-                        new
-                        {
-                            Id = "5",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Key = "api-key",
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Value = "a4db08b7-5729-4ba9-8c08-f2df493465a",
-                            WidgetId = "hy67214b-2067-47fc-9eaa-d3ac4b4f0351"
-                        });
                 });
 
             modelBuilder.Entity("Integrator.Features.Widgets.Models.Widget", b =>
@@ -137,35 +90,6 @@ namespace Integrator.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Widgets");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "a0cd214b-2067-47fc-9eaa-d3ac4b4f0353",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Timesmart",
-                            Type = 1,
-                            Url = "https://api.aaen.cloud/TimeSmart/InsertRegistration"
-                        },
-                        new
-                        {
-                            Id = "78iu214b-2067-47fc-9eaa-d3ac4b4f0352",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Timesmart Registrations",
-                            Type = 2,
-                            Url = "https://api.aaen.cloud/TimeSmart/GetCategories"
-                        },
-                        new
-                        {
-                            Id = "hy67214b-2067-47fc-9eaa-d3ac4b4f0351",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "SAP List",
-                            Type = 0,
-                            Url = "https://app.aaen.cloud/api/sap"
-                        });
                 });
 
             modelBuilder.Entity("Integrator.Features.Workspaces.Models.Workspace", b =>

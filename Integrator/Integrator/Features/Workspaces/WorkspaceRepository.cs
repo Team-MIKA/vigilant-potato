@@ -37,7 +37,10 @@ namespace Integrator.Features.Workspaces
 
         public Workspace GetWorkspaceById(string id)
         {
-            return _context.Workspaces.Include(prop => prop.Widgets).ThenInclude(prop => prop.Widget).First(w => w.Id.Equals(id));
+            return _context.Workspaces
+                .Include(prop => prop.Widgets)
+                .ThenInclude(prop => prop.Widget).ThenInclude(w => w.Options)
+                .First(w => w.Id.Equals(id));
         }
 
 

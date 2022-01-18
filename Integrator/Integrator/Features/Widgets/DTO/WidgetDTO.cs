@@ -9,7 +9,7 @@ namespace Integrator.Features.Widgets.DTO
         public string Title { get; set; }
         public Integration Type { get; set; }
         public string Url { get; set; }
-        public IEnumerable<string> Options { get; set; }
+        public IEnumerable<Option> Options { get; set; }
 
     }
 }
