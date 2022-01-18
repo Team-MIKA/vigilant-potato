@@ -13,8 +13,7 @@ namespace Integrator.Features.Widgets
         {
         }
 
-        public new IEnumerable<Widget> ListAll() => _context.Widgets.Include(w => w.Options).ToList();
-        
+        public new IEnumerable<Widget> GetAll() => Context.Widgets.Include(w => w.Options).ToList();
 
         public void Test()
         {

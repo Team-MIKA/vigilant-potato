@@ -43,9 +43,9 @@ namespace Integrator.Features.Widgets
 
         public IEnumerable<WidgetDto> ListWidgets()
         {
-            var res = _unitOfWork.Widgets.ListAll()
+            var res = unitOfWork.Widgets.GetAll()
                 
-            .Select(widget => new WidgetDTO
+            .Select(widget => new WidgetDto
             {
                 Id = widget.Id,
                 Title = widget.Title,
@@ -60,7 +60,7 @@ namespace Integrator.Features.Widgets
         public async Task<Tuple<string, string, string>> CreateData(string widgetId, Dictionary<string, string> json, string publisherId)
         {
             var jsonEncoded = new FormUrlEncodedContent(json);
-            var widget = _mapper.Map<Widget>(ListWidgets().First(w => w.Id == widgetId));
+            var widget = mapper.Map<Widget>(ListWidgets().First(w => w.Id == widgetId));
             var response = await client.PostAsync(widget.Url, jsonEncoded);
             string guidFromTimesmart = await response.Content.ReadAsStringAsync();
             
