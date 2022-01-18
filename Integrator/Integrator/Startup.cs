@@ -4,8 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Text.Json.Serialization;
+using Integrator.Infrastructure;
 using Integrator.Infrastructure.ErrorHandling;
 using Integrator.Infrastructure.Extensions;
 
@@ -23,7 +22,7 @@ namespace Integrator
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(MapperProfiles));
             services.ConfigureDatabase(Configuration.GetConnectionString("MariaDbDockerORIGINAL"));
             services.ConfigureServices();
             services.ConfigureCors();

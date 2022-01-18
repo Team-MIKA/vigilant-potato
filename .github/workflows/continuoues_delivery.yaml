@@ -37,3 +37,6 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+      
+      - name: Deliver to production
+        run: curl -X POST ${{ secrets.UPDATE_SERVICE_HOOK }}

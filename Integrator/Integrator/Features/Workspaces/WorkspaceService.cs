@@ -14,37 +14,37 @@ namespace Integrator.Features.Workspaces
 {
     public class WorkspaceService : IWorkspaceService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IMapper mapper;
 
         public WorkspaceService(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
         }
 
-        public WorkspaceDTO GetById(string id)
+        public WorkspaceDto GetById(string id)
         {
-            var workspace = _unitOfWork.Workspaces.GetWorkspaceById(id);
-            var workspaceDto = _mapper.Map<WorkspaceDTO>(workspace);
+            var workspace = unitOfWork.Workspaces.GetWorkspaceById(id);
+            var workspaceDto = mapper.Map<WorkspaceDto>(workspace);
             return workspaceDto;
         }
 
-        public string AddWidgetToWorkspace(WidgetDTO widgetDto, string id)
+        public string AddWidgetToWorkspace(WidgetDto widgetDto, string id)
         {
-            var widget = _mapper.Map<Widget>(widgetDto);
-            var createdId = _unitOfWork.Workspaces.AddWidgetToWorkspace(widget, id);
-            _unitOfWork.Complete();
+            var widget = mapper.Map<Widget>(widgetDto);
+            var createdId = unitOfWork.Workspaces.AddWidgetToWorkspace(widget, id);
+            unitOfWork.Complete();
 
             return createdId;
         }
 
-        public string CreateWorkspace(WorkspaceDTO workspaceDto)
+        public string CreateWorkspace(WorkspaceDto workspaceDto)
         {
-            var workspace = _mapper.Map<Workspace>(workspaceDto);
+            var workspace = mapper.Map<Workspace>(workspaceDto);
 
-            _unitOfWork.Workspaces.Insert(workspace);
-            _unitOfWork.Complete();
+            unitOfWork.Workspaces.Insert(workspace);
+            unitOfWork.Complete();
 
             return workspace.Id;
         }
@@ -53,24 +53,24 @@ namespace Integrator.Features.Workspaces
         {
             //var workspace = _mapper.Map<Workspace>(workspaceDto);
 
-            _unitOfWork.Workspaces.Delete(id);
-            _unitOfWork.Complete();
+            unitOfWork.Workspaces.Delete(id);
+            unitOfWork.Complete();
 
             return id;
         }
 
         public string RemoveWidgetFromWorkspace(string widgetId)
         {
-            _unitOfWork.Workspaces.RemoveWidgetFromWorkspace(widgetId);
-            _unitOfWork.Complete();
+            unitOfWork.Workspaces.RemoveWidgetFromWorkspace(widgetId);
+            unitOfWork.Complete();
 
             return widgetId;
         }
 
-        public IEnumerable<WorkspaceDTO> ListWorkspaces()
+        public IEnumerable<WorkspaceDto> ListWorkspaces()
         {
-            var res = _unitOfWork.Workspaces.ListAll()
-            .Select(workspace => new WorkspaceDTO
+            var res = unitOfWork.Workspaces.GetAll()
+            .Select(workspace => new WorkspaceDto
             {
                 Id = workspace.Id,
                 Title = workspace.Title,

@@ -18,40 +18,34 @@ namespace Integrator.Features.Widgets
     [Route("[controller]")]
     public class WidgetController : ControllerBase
     {
-        private readonly ILogger<WidgetController> _logger;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-        private readonly IWidgetService _widgetService;
+        private readonly IWidgetService widgetService;
 
 
-        public WidgetController(ILogger<WidgetController> logger, IUnitOfWork unitOfWork, IMapper mapper, IWidgetService widgetService)
+        public WidgetController(IWidgetService widgetService)
         {
-            _logger = logger;
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-            _widgetService = widgetService;
+            this.widgetService = widgetService;
         }
 
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult CreateWidget([FromBody] WidgetDTO widgetDto)
+        public IActionResult CreateWidget([FromBody] WidgetDto widgetDto)
         {
-            if (!ModelState.IsValid) throw new Exception("Error creating widget");
+            if (!ModelState.IsValid) throw new Exception("Error creating a widget");
 
-            var widgetId = _widgetService.CreateWidget(widgetDto);
+            var widgetId = widgetService.CreateWidget(widgetDto);
 
             return Ok(widgetId);
 
         }
 
         [HttpGet("[action]")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<WidgetDTO>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<WidgetDto>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult ListWidgets()
         {
             if (!ModelState.IsValid) throw new Exception("Error retrieving a list of widgets");
-            var res = _widgetService.ListWidgets();
+            var res = widgetService.ListWidgets();
 
             return Ok(res);
         }
@@ -63,7 +57,7 @@ namespace Integrator.Features.Widgets
         {
             if (!ModelState.IsValid) throw new Exception("Error deleting widget: " + id);
             
-            var widgetId = _widgetService.DeleteWidget(id);
+            var widgetId = widgetService.DeleteWidget(id);
 
             return Ok(widgetId);
 

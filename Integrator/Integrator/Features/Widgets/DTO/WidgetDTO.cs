@@ -3,7 +3,7 @@ using Integrator.Features.Widgets.Models;
 
 namespace Integrator.Features.Widgets.DTO
 {
-    public class WidgetDTO
+    public class WidgetDto
     {
         public string Id { get; set; }
         public string Title { get; set; }
