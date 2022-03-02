@@ -23,7 +23,7 @@ namespace Integrator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(MapperProfiles));
-            services.ConfigureDatabase(Configuration.GetConnectionString("MariaDbDockerORIGINAL"));
+            services.ConfigureDatabase(Configuration.GetConnectionString("VeluxDB"));
             services.ConfigureServices();
             services.ConfigureCors();
             services.AddControllers();
