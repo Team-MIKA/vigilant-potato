@@ -1,0 +1,103 @@
+version: '3.3'
+services:
+  adminer:
+    image: adminer:latest
+    networks:
+      - traefik-public
+    logging:
+      driver: json-file
+    deploy:
+      labels:
+        traefik.http.routers.adminer-https.tls: 'true'
+        traefik.http.routers.adminer-https.entrypoints: https
+        traefik.http.routers.adminer-https.rule: Host(`data.${DOMAIN}`)
+        traefik.http.services.adminer.loadbalancer.server.port: '8080'
+        traefik.http.routers.adminer-http.middlewares: https-redirect
+        traefik.http.routers.adminer-https.tls.certresolver: le
+        traefik.http.routers.adminer-http.rule: Host(`data.${DOMAIN}`)
+        traefik.constraint-label: traefik-public
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+        traefik.http.routers.adminer-http.entrypoints: http
+      placement:
+        constraints:
+          - node.role == worker
+  mariadb:
+    image: mariadb
+    # platform: linux/arm64
+    environment:
+      MYSQL_ROOT_PASSWORD: mikapassword
+    ports:
+      - 3306:3306
+    volumes:
+      - mysqldata:/var/lib/mysql
+    networks:
+      - traefik-public
+    logging:
+      driver: json-file
+    deploy:
+      labels:
+        traefik.http.services.mariadb.loadbalancer.server.port: '3306'
+        traefik.http.routers.mariadb-http.rule: Host(`database.${DOMAIN}`)
+
+        traefik.http.routers.mariadb-http.entrypoint: http
+        traefik.constraint-label: traefik-public
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+
+  integrator:
+    image: 888aaen/integrator:latest
+    networks:
+      - traefik-public
+    logging:
+      driver: json-file
+
+    deploy:
+      replicas: 2
+      labels:
+        traefik.http.routers.integrator-http.entrypoints: http
+        traefik.http.services.integrator.loadbalancer.server.port: '80'
+        traefik.constraint-label: traefik-public
+        traefik.http.routers.integrator-http.rule: Host(`api.$DOMAIN`)
+        traefik.docker.network: traefik-public
+        traefik.http.routers.integrator-http.middlewares: https-redirect
+        traefik.http.routers.integrator-https.rule: Host(`api.$DOMAIN`)
+        traefik.http.routers.integrator-https.entrypoints: https
+        traefik.http.routers.integrator-https.tls: 'true'
+        traefik.http.routers.integrator-https.tls.certresolver: le
+        traefik.enable: 'true'
+      
+      placement:
+        constraints:
+          - node.role == worker
+  react:
+    image: 888aaen/business-assistant:latest
+    networks:
+      - traefik-public
+    logging:
+      driver: json-file
+    environment:
+      - NEXT_PUBLIC_API_URL
+    deploy:
+      replicas: 2
+      labels:
+        traefik.constraint-label: traefik-public
+        traefik.http.routers.react-http.entrypoints: http
+        traefik.http.services.react.loadbalancer.server.port: '3000'
+        traefik.http.routers.react-http.rule: Host(`app.${DOMAIN}`)
+        traefik.http.routers.react-http.middlewares: https-redirect
+        traefik.http.routers.react-https.rule: Host(`app.${DOMAIN?Variable not set}`)
+        traefik.http.routers.react-https.entrypoints: https
+        traefik.http.routers.react-https.tls: 'true'
+        traefik.http.routers.react-https.tls.certresolver: le
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+      placement:
+        constraints:
+          - node.role == worker
+networks:
+  traefik-public:
+    external: true
+volumes:
+  mysqldata:
+    driver: local

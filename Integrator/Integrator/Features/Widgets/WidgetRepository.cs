@@ -1,6 +1,9 @@
-﻿using Integrator.Features.Widgets.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Integrator.Features.Widgets.Models;
 using Integrator.Features.Workspaces.Models;
 using Integrator.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace Integrator.Features.Widgets
 {
@@ -9,5 +12,13 @@ namespace Integrator.Features.Widgets
         public WidgetRepository(IntegratorContext context) : base(context)
         {
         }
+
+        public new IEnumerable<Widget> GetAll() => Context.Widgets.Include(w => w.Options).ToList();
+
+        public void Test()
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }
